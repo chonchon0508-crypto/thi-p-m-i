@@ -16,5 +16,5 @@ Mở trang sẽ chạy intro khoảng 4 giây: SYSTEM LOAD… → WE SLAYED → 
 
 Điều hướng bằng các nút trong từng phần; không có thanh đầu trang hoặc thanh chương ở chân trang. Trên màn hình nhỏ vẫn cuộn được nội dung dài trong từng phần. Không tự phát âm thanh.
 
-Intro dùng cùng tông đen–lime/ngà với trang đầu. Chạm cúp để ăn mừng, rê chuột lên thẻ cúp/thư để đổi góc sáng; nút trái tim trong thư chỉ phản hồi tại trang, không gửi dữ liệu và không lưu sau khi tải lại. Các nút hỗ trợ bàn phím. Chuyển động và hiệu ứng nghiêng tự giảm theo thiết lập hệ điều hành.
+Intro dùng cùng tông đen–lime/ngà với trang đầu. Thẻ giải thưởng có hai mặt kính, rê chuột để lật sang tên tiết mục lớn, đưa chuột ra để xem lại cúp. Trên điện thoại chạm để lật, trên bàn phím dùng Enter/Space và Escape để trở lại. Rê chuột lên thư để đổi góc sáng; nút trái tim trong thư chỉ phản hồi tại trang, không gửi dữ liệu và không lưu sau khi tải lại. Các nút hỗ trợ bàn phím. Chuyển động và hiệu ứng nghiêng tự giảm theo thiết lập hệ điều hành.
 # thi-p-m-i

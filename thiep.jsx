@@ -64,7 +64,7 @@
     </div>
     <main id="main" inert>
       <section class="scene" data-scene="0" aria-labelledby="hero-title"><div class="intro-corner">VOL. 01 / THE VICTORY LAP</div><div class="hero-layout"><div class="hero-copy"><div class="eyebrow">Dành cho những người đã hết mình</div><h1 class="hero-title" id="hero-title" aria-label="WE SLAY."><span class="word" aria-hidden="true">${letters('WE')}</span><span class="word slay" aria-hidden="true">${letters('SLAY.',2)}</span></h1><div class="hero-bottom"><span class="little-star" aria-hidden="true">✳</span><p class="copy"><strong>Chúng ta không chỉ bước lên sân khấu.<br>Chúng ta đã để lại dấu ấn.</strong><br>Và đây là khoảnh khắc của tất cả chúng ta.</p></div><div class="actions"><button class="primary" data-go="1">MỞ KHÓA CHIẾN TÍCH <span>↗</span></button><span class="hint">01 / MỘT HÀNH TRÌNH ĐÁNG NHỚ</span></div></div><div class="hero-art" aria-hidden="true"><div class="art-ring"></div><div class="art-ring r2"></div><span class="art-cross">✦</span><span class="art-cross second">✳</span>${trophy('gold','hero-trophy')}<span class="sticker lime">100% TEAM ENERGY ↗</span><span class="sticker outline">BORN TO SHINE.</span><span class="barcode"></span><span class="art-label">THE STAGE WAS OURS. SO IS TONIGHT.</span></div></div><div class="marquee" aria-hidden="true"><div class="marquee-track">${Array.from({length:4},()=>'<span>WE SHOWED UP <b>✳</b> WE GAVE IT ALL <b>✳</b> WE MADE IT <b>✳</b> NOW WE CELEBRATE <b>✳</b></span>').join('')}</div></div></section>
-      <section class="scene" data-scene="1" hidden aria-labelledby="awards-title"><div class="section-head"><div><div class="eyebrow">01 / Những nỗ lực đã thành hình</div><h2 class="section-title" id="awards-title" tabindex="-1">Hết mình.<br><em>Hái vinh quang.</em></h2></div><p class="copy">Từ những buổi tập đến ánh đèn sân khấu.<br><strong>5 giải thưởng. Một tinh thần đồng đội.</strong></p></div><div class="award-grid">${awards.map(([tone,title,label,performance],i)=>`<article class="award-card" style="--i:${i}"><span class="award-no">${label}</span>${trophy(tone,'award-icon')}<h3>${title}</h3><p class="performance-name">${performance}</p></article>`).join('')}</div><div class="award-total"><p>01 NHẤT &nbsp; / &nbsp; 03 BA &nbsp; / &nbsp; 01 KHUYẾN KHÍCH</p><div class="actions"><button class="text-button" id="celebrate">Thêm một tràng pháo hoa ✳</button><button class="primary" data-go="2">GỬI NHỮNG NGƯỜI ĐỒNG ĐỘI <span>↗</span></button></div></div></section>
+      <section class="scene" data-scene="1" hidden aria-labelledby="awards-title"><div class="section-head"><div><div class="eyebrow">01 / Những nỗ lực đã thành hình</div><h2 class="section-title" id="awards-title" tabindex="-1">Hết mình.<br><em>Hái vinh quang.</em></h2></div><p class="copy">Từ những buổi tập đến ánh đèn sân khấu.<br><strong>5 giải thưởng. Một tinh thần đồng đội.</strong></p></div><div class="award-grid">${awards.map(([tone,title,label,performance],i)=>`<article class="award-card flip-award" style="--i:${i}"><div class="award-rotor"><div class="award-face award-front"><span class="award-no">${label}</span>${trophy(tone,'award-icon')}<h3>${title}</h3><span class="flip-hint">RÊ CHUỘT HOẶC CHẠM ĐỂ LẬT ↗</span></div><div class="award-face award-back" id="award-back-${i}" aria-hidden="true"><span class="award-back-rank">${title}</span><span class="award-back-star" aria-hidden="true">✳</span><p class="performance-name">${performance}</p><span class="flip-hint">MỘT DẤU ẤN CỦA CHÚNG TA</span></div></div><button class="award-touch" aria-expanded="false" aria-controls="award-back-${i}" aria-label="${title}, xem tên tiết mục"></button></article>`).join('')}</div><div class="award-total"><p>01 NHẤT &nbsp; / &nbsp; 03 BA &nbsp; / &nbsp; 01 KHUYẾN KHÍCH</p><div class="actions"><button class="text-button" id="celebrate">Thêm một tràng pháo hoa ✳</button><button class="primary" data-go="2">GỬI NHỮNG NGƯỜI ĐỒNG ĐỘI <span>↗</span></button></div></div></section>
       <section class="scene" data-scene="2" hidden aria-labelledby="letter-title"><div class="letter-layout"><div class="letter-heading"><div class="eyebrow">02 / Behind every spotlight</div><h2 class="section-title" id="letter-title" tabindex="-1">Cúp là của đội.<br><em>Tự hào là<br>của chúng ta.</em></h2><p class="copy">Có những điều ánh đèn sân khấu không chiếu tới. Nhưng chúng ta đều nhớ.</p><span class="scribble">THIS ONE'S FOR YOU ↗</span></div><article class="letter-paper"><div class="letter-meta"><span>MỘT LÁ THƯ, THẬT LÒNG.</span><span>♥ / TO OUR TEAM</span></div><h3>Gửi những người đã cùng cháy,</h3><p>Cảm ơn những buổi tập đến quên giờ, những lần làm lại “thêm một lần nữa”, và cả những lúc mệt nhưng chẳng ai bỏ cuộc.</p><p>Từ người đứng giữa sân khấu đến những người lặng lẽ phía sau, <strong>mỗi người đều là một phần không thể thiếu</strong> của chiến thắng này.</p><p><strong>1 giải Nhất, 3 giải Ba và 1 giải Khuyến khích.</strong> Đó là thành tích. Còn điều tuyệt nhất là chúng ta đã cùng nhau làm được.</p><p>Sân khấu đã hạ màn. Giờ thì cất những lo lắng đi, giữ lại niềm tự hào và dành một đêm thật vui cho chính mình nhé!</p><div class="signature"><strong>Thương và tự hào về cả đội.</strong><span>✳</span></div><p class="tiny">P.S. Chương tiếp theo cần bạn lên đồ thật chất.</p></article></div><div class="actions"><button class="text-button" data-go="1">← Ngắm lại chiến tích</button><button class="primary fire-button" data-go="3"><span class="fire-label">ĐỌC XONG RỒI. LÊN ĐỒ! ↗</span><span class="button-flames" aria-hidden="true">${Array.from({length:12},(_,i)=>`<i style="--f:${i}"></i>`).join('')}</span></button></div></section>
       <section class="scene" data-scene="3" hidden aria-labelledby="party-title"><div class="party-layout"><div><div class="eyebrow">03 / After the stage, after dark</div><h2 class="party-title" id="party-title" tabindex="-1">LIGHTS OFF.<span>NIGHT ON.</span></h2><span class="party-tag">HẾT DIỄN RỒI. GIỜ TỚI LƯỢT MÌNH VUI.</span><p class="copy party-copy">Một đêm để nâng ly, kể lại những pha hú hồn và ăn mừng như cách chúng ta đã diễn:<br><strong>Hết mình. Hết cỡ. Cùng nhau.</strong></p><div class="actions"><button class="rsvp-button" id="confirm-attendance" aria-pressed="false"><span class="rsvp-inner"><span class="rsvp-front">🔥 XÁC NHẬN THAM GIA</span><span class="rsvp-back" aria-hidden="true">🔥 Game On!</span></span></button><button class="text-button" id="party-burst">Bật mood ✦</button></div><p class="hint" style="margin-top:23px"><span class="equalizer" aria-hidden="true">${Array.from({length:5},(_,i)=>`<i style="--i:${i}"></i>`).join('')}</span>GOOD VIBES ONLY / NO ONE LEFT BEHIND</p></div><div class="party-right"><div class="disco" aria-hidden="true"><canvas id="disco"></canvas><span class="disco-flare"></span></div>${renderInvitations()}</div></div></section>
     </main>
@@ -74,7 +74,7 @@
   document.querySelector('.boot-intro').insertAdjacentHTML('afterbegin', '<div class="boot-orbit" aria-hidden="true"><span>✳</span></div><span class="boot-edition" aria-hidden="true">THE ENCORE / VICTORY SEQUENCE</span>');
   document.querySelectorAll('.award-card').forEach((card,i)=>{
     card.dataset.tone=awards[i][0];
-    card.insertAdjacentHTML('beforeend', `<span class="award-spark s1" aria-hidden="true">✦</span><span class="award-spark s2" aria-hidden="true">✧</span><span class="award-pedestal" aria-hidden="true"></span><button class="award-touch" aria-label="Ăn mừng ${awards[i][1]}${i>0&&i<4?' số '+i:''}"><span>CHẠM ĐỂ TỎA SÁNG ↗</span></button>`);
+    card.querySelector('.award-front').insertAdjacentHTML('beforeend', '<span class="award-spark s1" aria-hidden="true">✦</span><span class="award-spark s2" aria-hidden="true">✧</span><span class="award-pedestal" aria-hidden="true"></span>');
   });
   document.querySelector('.letter-heading').insertAdjacentHTML('beforeend', `
     <div class="memory-stack" aria-label="Những điều làm nên chúng ta">
@@ -127,15 +127,21 @@
   document.querySelector('#celebrate').addEventListener('click',celebrate);
   document.querySelector('#party-burst').addEventListener('click',celebrate);
   document.querySelector('.hero-celebrate').addEventListener('click',celebrate);
-  let lastAwardBurst=0;
-  document.querySelectorAll('.award-touch').forEach((button,i)=>button.addEventListener('click',()=>{
-    if(Date.now()-lastAwardBurst<450)return;
-    lastAwardBurst=Date.now();
-    const card=button.closest('.award-card'),box=card.getBoundingClientRect();
-    card.classList.remove('celebrating');void card.offsetWidth;card.classList.add('celebrating');
-    burst(box.left+box.width/2,box.top+box.height*.42,50);
-    toast(`${awards[i][1]}, ${awards[i][3]}. Tự hào về cả đội!`);
-  }));
+  document.querySelectorAll('.flip-award').forEach((card,i)=>{
+    const button=card.querySelector('.award-touch');
+    function flip(show){
+      card.classList.toggle('is-flipped',show);
+      button.setAttribute('aria-expanded',String(show));
+      button.setAttribute('aria-label',show?`${awards[i][1]}, ${awards[i][3]}. Lật lại để xem cúp`:`${awards[i][1]}, xem tên tiết mục`);
+      card.querySelector('.award-front').setAttribute('aria-hidden',String(show));
+      card.querySelector('.award-back').setAttribute('aria-hidden',String(!show));
+    }
+    card.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')flip(true);});
+    card.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse')flip(false);});
+    button.addEventListener('click',()=>flip(!card.classList.contains('is-flipped')));
+    button.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();flip(false);}});
+    button.addEventListener('blur',()=>flip(false));
+  });
   document.querySelector('#send-love').addEventListener('click',event=>{
     const button=event.currentTarget,loved=button.getAttribute('aria-pressed')!=='true';
     button.setAttribute('aria-pressed',String(loved));
@@ -195,7 +201,7 @@
   window.addEventListener('pointermove',event=>{pointer={x:event.clientX/innerWidth,y:event.clientY/innerHeight};},{passive:true});
   // Card lighting follows the pointer; touch and keyboard users get the same celebration buttons.
   const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
-  document.querySelectorAll('.award-card,.letter-paper,.hero-art,.ticket').forEach(el=>{
+  document.querySelectorAll('.letter-paper,.hero-art,.ticket').forEach(el=>{
     el.addEventListener('pointermove',event=>{
       if(calm||!finePointer.matches)return;
       const rect=el.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width,y=(event.clientY-rect.top)/rect.height;
