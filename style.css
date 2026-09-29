@@ -197,3 +197,17 @@ body.booting .jump{animation-play-state:paused}
 @keyframes invite-unfold{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @media(max-width:600px){.award-card .performance-name{font-size:11px;min-height:58px;padding:0 3px}.award-pedestal{top:134px}.award-card:first-child .performance-name{font-size:12px;min-height:0}.invitation,.envelope-cover{min-height:375px}.envelope-cover{padding:22px}.envelope-caption strong{font-size:22px}.invite-details{padding:22px}.invite-details h3{font-size:25px}.invite-meta{grid-template-columns:74px 1fr}.rsvp-button{min-width:225px;font-size:10px}.fire-button .fire-label{font-size:10px}.button-flames i{width:18px}.invite-time{font-size:50px}}
 @media(prefers-reduced-motion:reduce){.button-flames i{filter:none}.envelope-cover.unsealing .envelope-flap{transform:none}.rsvp-inner{transition:none}}
+.invitation-picker{margin-top:20px}
+.invitation-picker>p{display:flex;justify-content:space-between;gap:10px;color:#cfbfdc;font-size:8px;letter-spacing:1.2px;line-height:1.8;margin:0 0 10px}
+.invitation-picker>p span{color:#a398b3;letter-spacing:0}
+.stop-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stop-option{--stop-color:246,195,112;min-width:0;position:relative;padding:15px 14px;text-align:left;background:rgba(var(--stop-color),.035);border:1px solid rgba(var(--stop-color),.24);color:#ddd5e5;transition:background .25s,border-color .25s,box-shadow .25s}
+.stop-option.violet{--stop-color:197,167,255}
+.stop-option>span{display:flex;justify-content:space-between;gap:6px;color:rgb(var(--stop-color));font-size:8px;letter-spacing:1px}
+.stop-option strong{display:block;font-size:12px;line-height:1.5;margin:10px 0 5px;font-weight:600}
+.stop-option small{font-size:9px;color:#a99eb6}
+.stop-option[aria-pressed="true"]{background:rgba(var(--stop-color),.13);border-color:rgba(var(--stop-color),.85);box-shadow:inset 0 -3px rgb(var(--stop-color)),0 0 20px rgba(var(--stop-color),.06)}
+.stop-option:hover:not(:disabled){background:rgba(var(--stop-color),.2);border-color:rgb(var(--stop-color))}
+.stop-option:focus-visible{outline-color:rgb(var(--stop-color))}
+.stop-option:disabled{cursor:wait}
+@media(max-width:600px){.stop-option{padding:13px 10px}.stop-option strong{font-size:11px}.stop-option small{font-size:8px}.invitation-picker>p{font-size:7px}}
