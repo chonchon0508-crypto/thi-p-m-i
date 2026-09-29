@@ -1,0 +1,129 @@
+/* Browser-native JavaScript, intentionally valid without JSX compilation.
+ * Open index.html directly. No React, GSAP or icon-library dependency.
+ * Replace the three null values below when the party details are confirmed.
+ */
+(() => {
+  'use strict';
+  const PARTY = { date: null, time: null, location: null, dressCode: 'Lên đồ thật chất. Mang theo năng lượng thật cháy.' };
+  const app = document.getElementById('app');
+  if (!app) return;
+  const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  let svgId = 0;
+  function trophy(tone = 'gold', cls = '') {
+    const id = `metal-${svgId++}`;
+    const colors = tone === 'bronze' ? ['#fff0c5','#e0a473','#75462c','#dfaa7b'] : tone === 'silver' ? ['#ffffff','#c2ced5','#566773','#e5edf4'] : ['#fffad3','#ffdb65','#926017','#fbe39a'];
+    return `<svg class="${cls}" viewBox="0 0 240 280" fill="none" aria-hidden="true"><defs><linearGradient id="${id}" x1="43" y1="80" x2="196" y2="125" gradientUnits="userSpaceOnUse"><stop stop-color="${colors[0]}"/><stop offset=".27" stop-color="${colors[1]}"/><stop offset=".55" stop-color="${colors[2]}"/><stop offset=".82" stop-color="${colors[1]}"/><stop offset="1" stop-color="${colors[3]}"/></linearGradient></defs><g stroke="${colors[1]}" stroke-width="9"><path d="M65 61H30v30c0 35 22 51 49 51"/><path d="M175 61h35v30c0 35-22 51-49 51"/></g><path d="M60 43h120l-9 70c-3 32-20 49-44 55v35h27v17H86v-17h27v-35c-24-6-41-23-44-55z" fill="url(#${id})"/><ellipse cx="120" cy="43" rx="60" ry="12" fill="${colors[3]}"/><ellipse cx="120" cy="43" rx="50" ry="6" fill="${colors[2]}"/><path d="M79 59l7 49c3 20 9 31 17 37" stroke="white" stroke-opacity=".45" stroke-width="4"/><path d="m120 73 7 15 17 2-12 12 3 17-15-8-15 8 3-17-12-12 17-2z" fill="${colors[0]}" opacity=".8"/><path d="M76 221h88l9 27H67z" fill="url(#${id})"/><rect x="63" y="246" width="114" height="13" rx="3" fill="${colors[2]}"/><rect x="92" y="228" width="56" height="14" rx="1" fill="${colors[0]}" opacity=".7"/></svg>`;
+  }
+  const letters = (text, offset=0) => [...text].map((letter,i)=>`<span class="jump" style="--i:${i+offset}">${letter}</span>`).join('');
+  const awards = [ ['gold','Giải Vàng','01 / RỰC RỠ NHẤT'], ['bronze','Giải Đồng','02 / HẾT MÌNH'], ['bronze','Giải Đồng','03 / BỨT PHÁ'], ['bronze','Giải Đồng','04 / TỎA SÁNG'], ['silver','Khuyến khích','05 / ĐÁNG TỰ HÀO'] ];
+  app.innerHTML = `
+    <div class="world" aria-hidden="true"><div class="aura gold-aura"></div><div class="aura club-aura"></div><div class="orbit"></div><div class="orbit two"></div><div class="coordinates">GOOD PEOPLE / GREAT MEMORIES / ALL THE WAY UP</div><div class="grid-floor"></div><div class="beam"></div><div class="beam b2"></div></div>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <header><button class="brand" data-go="0" aria-label="Về mở màn"><span class="brand-mark">✳</span><span><strong>THE ENCORE</strong><small>OUR MOMENT. OUR NIGHT.</small></span></button><span class="edition">VĂN NGHỆ / CELEBRATION EDITION</span><div class="top-tools"><span class="live">WE DID IT, TOGETHER</span><button class="motion-toggle" aria-pressed="false">Giảm chuyển động</button></div></header>
+    <main id="main">
+      <section class="scene" data-scene="0" aria-labelledby="hero-title"><div class="intro-corner">VOL. 01 — THE VICTORY LAP</div><div class="hero-layout"><div class="hero-copy"><div class="eyebrow">Dành cho những người đã hết mình</div><h1 class="hero-title" id="hero-title" aria-label="WE SLAY."><span class="word" aria-hidden="true">${letters('WE')}</span><span class="word slay" aria-hidden="true">${letters('SLAY.',2)}</span></h1><div class="hero-bottom"><span class="little-star" aria-hidden="true">✳</span><p class="copy"><strong>Chúng ta không chỉ bước lên sân khấu.<br>Chúng ta đã để lại dấu ấn.</strong><br>Và đây là khoảnh khắc của tất cả chúng ta.</p></div><div class="actions"><button class="primary" data-go="1">MỞ KHÓA CHIẾN TÍCH <span>↗</span></button><span class="hint">01 — MỘT HÀNH TRÌNH ĐÁNG NHỚ</span></div></div><div class="hero-art" aria-hidden="true"><div class="art-ring"></div><div class="art-ring r2"></div><span class="art-cross">✦</span><span class="art-cross second">✳</span>${trophy('gold','hero-trophy')}<span class="sticker lime">100% TEAM ENERGY ↗</span><span class="sticker outline">BORN TO SHINE.</span><span class="barcode"></span><span class="art-label">THE STAGE WAS OURS. SO IS TONIGHT.</span></div></div><div class="marquee" aria-hidden="true"><div class="marquee-track">${Array.from({length:4},()=>'<span>WE SHOWED UP <b>✳</b> WE GAVE IT ALL <b>✳</b> WE MADE IT <b>✳</b> NOW WE CELEBRATE <b>✳</b></span>').join('')}</div></div></section>
+      <section class="scene" data-scene="1" hidden aria-labelledby="awards-title"><div class="section-head"><div><div class="eyebrow">01 / Những nỗ lực đã thành hình</div><h2 class="section-title" id="awards-title" tabindex="-1">Hết mình.<br><em>Hái vinh quang.</em></h2></div><p class="copy">Từ những buổi tập đến ánh đèn sân khấu.<br><strong>5 giải thưởng. Một tinh thần đồng đội.</strong></p></div><div class="award-grid">${awards.map(([tone,title,label],i)=>`<article class="award-card" style="--i:${i}"><span class="award-no">${label}</span>${trophy(tone,'award-icon')}<h3>${title}</h3><p>${i===0?'MỘT KHOẢNH KHẮC VÀNG':i===4?'KHÔNG NGỪNG TIẾN LÊN':'CÙNG NHAU LÀM NÊN'}</p></article>`).join('')}</div><div class="award-total"><p>01 VÀNG &nbsp; / &nbsp; 03 ĐỒNG &nbsp; / &nbsp; 01 KHUYẾN KHÍCH</p><div class="actions"><button class="text-button" id="celebrate">Thêm một tràng pháo hoa ✳</button><button class="primary" data-go="2">GỬI NHỮNG NGƯỜI ĐỒNG ĐỘI <span>↗</span></button></div></div></section>
+      <section class="scene" data-scene="2" hidden aria-labelledby="letter-title"><div class="letter-layout"><div class="letter-heading"><div class="eyebrow">02 / Behind every spotlight</div><h2 class="section-title" id="letter-title" tabindex="-1">Cúp là của đội.<br><em>Tự hào là<br>của chúng ta.</em></h2><p class="copy">Có những điều ánh đèn sân khấu không chiếu tới. Nhưng chúng ta đều nhớ.</p><span class="scribble">THIS ONE'S FOR YOU ↗</span></div><article class="letter-paper"><div class="letter-meta"><span>MỘT LÁ THƯ, THẬT LÒNG.</span><span>♥ / TO OUR TEAM</span></div><h3>Gửi những người đã cùng cháy,</h3><p>Cảm ơn những buổi tập đến quên giờ, những lần làm lại “thêm một lần nữa”, và cả những lúc mệt nhưng chẳng ai bỏ cuộc.</p><p>Từ người đứng giữa sân khấu đến những người lặng lẽ phía sau, <strong>mỗi người đều là một phần không thể thiếu</strong> của chiến thắng này.</p><p><strong>1 giải Vàng, 3 giải Đồng và 1 giải Khuyến khích.</strong> Đó là thành tích. Còn điều tuyệt nhất là chúng ta đã làm được — cùng nhau.</p><p>Sân khấu đã hạ màn. Giờ thì cất những lo lắng đi, giữ lại niềm tự hào và dành một đêm thật vui cho chính mình nhé!</p><div class="signature"><strong>Thương và tự hào về cả đội.</strong><span>✳</span></div><p class="tiny">P.S. Chương tiếp theo cần bạn lên đồ thật chất.</p></article></div><div class="actions"><button class="text-button" data-go="1">← Ngắm lại chiến tích</button><button class="primary" data-go="3">ĐỌC XONG RỒI. LÊN ĐỒ! <span>↗</span></button></div></section>
+      <section class="scene" data-scene="3" hidden aria-labelledby="party-title"><div class="party-layout"><div><div class="eyebrow">03 / After the stage, after dark</div><h2 class="party-title" id="party-title" tabindex="-1">LIGHTS OFF.<span>NIGHT ON.</span></h2><span class="party-tag">HẾT DIỄN RỒI. GIỜ TỚI LƯỢT MÌNH VUI.</span><p class="copy party-copy">Một đêm để nâng ly, kể lại những pha hú hồn và ăn mừng như cách chúng ta đã diễn:<br><strong>Hết mình. Hết cỡ. Cùng nhau.</strong></p><div class="actions"><button class="primary" id="save-ticket">LƯU THÔNG TIN THIỆP <span>↗</span></button><button class="text-button" id="party-burst">Bật mood ✦</button></div><p class="hint" style="margin-top:23px"><span class="equalizer" aria-hidden="true">${Array.from({length:5},(_,i)=>`<i style="--i:${i}"></i>`).join('')}</span>GOOD VIBES ONLY / NO ONE LEFT BEHIND</p></div><div class="party-right"><div class="disco" aria-hidden="true"><canvas id="disco"></canvas><span class="disco-flare"></span></div><article class="ticket"><div class="ticket-top"><span>THE ENCORE / PRIVATE PARTY</span><span>✦ ADMIT ONE</span></div><h3>Bạn có hẹn với cả đội.</h3><div class="ticket-row"><span>NGÀY</span><strong>${escapeHTML(PARTY.date || 'Đang chốt · sẽ thông báo cùng đội')}</strong></div><div class="ticket-row"><span>GIỜ</span><strong>${escapeHTML(PARTY.time || 'Sẽ cập nhật')}</strong></div><div class="ticket-row"><span>ĐỊA ĐIỂM</span><strong>${escapeHTML(PARTY.location || 'Bật mí sau · nhớ theo dõi nhóm nhé')}</strong></div><div class="ticket-row"><span>DRESS CODE</span><strong>${escapeHTML(PARTY.dressCode)}</strong></div><div class="ticket-foot"><span>YOU ARE ON THE GUEST LIST.</span><span class="mini-bars" aria-hidden="true"></span></div></article></div></div></section>
+    </main>
+    <footer><nav class="chapter-nav" aria-label="Các phần của thiệp">${['MỞ MÀN','VINH DANH','LỜI CẢM ƠN','LÊN ĐỒ'].map((name,i)=>`<button data-go="${i}" ${i===0?'class="active" aria-current="step"':''}><span class="number">0${i+1}</span>${name}</button>`).join('')}</nav><span class="footer-note">MADE OF EFFORT. FINISHED WITH LOVE. ↗</span></footer>
+    <div class="transition-veil" aria-hidden="true"></div><div class="toast" role="status" aria-live="polite"></div>`;
+
+  const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
+  let calm = reducedQuery.matches;
+  let current = 0, switching = false, toastTimer, pointer = {x: .65, y: .3};
+  const scenes = [...document.querySelectorAll('.scene')];
+  const veil = document.querySelector('.transition-veil');
+  const motionButton = document.querySelector('.motion-toggle');
+  function syncMotion() {
+    document.body.classList.toggle('calm', calm);
+    motionButton.setAttribute('aria-pressed', String(calm));
+    motionButton.textContent = calm ? 'Bật chuyển động' : 'Giảm chuyển động';
+  }
+  syncMotion();
+  motionButton.addEventListener('click', () => {calm = !calm; syncMotion(); if(calm) sparks.length=0;});
+  reducedQuery.addEventListener('change', event => {calm=event.matches;syncMotion();});
+  function toast(message) { clearTimeout(toastTimer); const el=document.querySelector('.toast');el.textContent=message;el.classList.add('visible');toastTimer=setTimeout(()=>el.classList.remove('visible'),3600); }
+  function go(next) {
+    if (switching || next === current || next < 0 || next > 3) return;
+    switching = true;
+    document.querySelectorAll('[data-go]').forEach(button => button.disabled=true);
+    veil.textContent = ['WE SLAY.','WE WON.','WITH LOVE.','LET’S PARTY.'][next];
+    veil.style.background = next===3 ? '#d4b0ff' : '#d8ff3e';
+    veil.classList.remove('run'); void veil.offsetWidth; veil.classList.add('run');
+    setTimeout(() => {
+      scenes[current].hidden = true;
+      current=next;
+      document.body.classList.remove('mode-0','mode-1','mode-2','mode-3');
+      document.body.classList.add(`mode-${next}`);
+      scenes[next].hidden=false;
+      scenes[next].classList.remove('enter');void scenes[next].offsetWidth;scenes[next].classList.add('enter');
+      window.scrollTo({top:0,behavior:'instant'});
+      const heading=scenes[next].querySelector('h1,h2');heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});
+      document.querySelectorAll('.chapter-nav button').forEach((button,i)=> {button.classList.toggle('active',i===next);if(i===next)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');});
+      if(next===1 || next===3) celebrate();
+    },calm?0:430);
+    setTimeout(()=>{switching=false;veil.classList.remove('run');document.querySelectorAll('[data-go]').forEach(button=>button.disabled=false);},calm?40:950);
+  }
+  document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>go(Number(button.dataset.go))));
+  document.querySelector('#celebrate').addEventListener('click',celebrate);
+  document.querySelector('#party-burst').addEventListener('click',celebrate);
+  document.querySelector('#save-ticket').addEventListener('click',()=> {
+    const text = `THE ENCORE — THIỆP MỜI ĂN MỪNG\n\n1 Vàng · 3 Đồng · 1 Khuyến khích\n\nNgày: ${PARTY.date || 'Sẽ cập nhật'}\nGiờ: ${PARTY.time || 'Sẽ cập nhật'}\nĐịa điểm: ${PARTY.location || 'Sẽ cập nhật'}\nDress code: ${PARTY.dressCode}\n\nThương và tự hào về cả đội.\n`;
+    const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
+    const link=document.createElement('a');link.href=url;link.download='The-Encore-Thiep-moi.txt';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+    toast('Đã tạo tệp thiệp. Ngày, giờ và địa điểm sẽ được cập nhật.');
+  });
+  window.addEventListener('pointermove',event=>{pointer={x:event.clientX/innerWidth,y:event.clientY/innerHeight};},{passive:true});
+
+  // One animation loop for ambient dust, confetti, fireworks and spherical mirrors.
+  const canvas=document.querySelector('#particles'), ctx=canvas.getContext('2d');
+  const disco=document.querySelector('#disco'), dc=disco.getContext('2d');
+  let width=innerWidth,height=innerHeight,dpr=1,sparks=[],last=0,lastPaint=0;
+  const dust=Array.from({length:44},()=>({x:Math.random(),y:Math.random(),s:.5+Math.random()*1.7,v:.006+Math.random()*.018,phase:Math.random()*6}));
+  function resize(){width=innerWidth;height=innerHeight;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx?.setTransform(dpr,0,0,dpr,0,0);disco.width=disco.height=280*dpr;dc?.setTransform(dpr,0,0,dpr,0,0);}
+  window.addEventListener('resize',resize,{passive:true});resize();
+  function burst(x,y,count=65){if(calm)return;const palette=current===3?['#d4b0ff','#fff','#ff87bd','#d8ff3e']:['#ffdd75','#d8ff3e','#fff3c1','#e6a168'];for(let i=0;i<count;i++){const angle=Math.random()*Math.PI*2,speed=90+Math.random()*280;sparks.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-80,life:1.1+Math.random()*1.3,total:2.4,color:palette[i%4],size:2+Math.random()*4,rotation:Math.random()*6,confetti:i%3===0});}sparks=sparks.slice(-400);}
+  function celebrate(){if(calm){toast('✦ 1 Vàng · 3 Đồng · 1 Khuyến khích. Tự hào về cả đội!');return;}burst(width*.25,height*.35);burst(width*.73,height*.28);}
+  // Project tile corners on a sphere, cull its back side, shade by rotating normal.
+  function drawDisco(time){
+    if(!dc)return;dc.clearRect(0,0,280,280);
+    const cx=140,cy=140,r=116,rotation=calm?0:time*.00028;
+    const halo=dc.createRadialGradient(cx,cy,70,cx,cy,138);halo.addColorStop(0,'#d9c7ff18');halo.addColorStop(.8,'#e3caff12');halo.addColorStop(1,'#d9c7ff00');dc.fillStyle=halo;dc.fillRect(0,0,280,280);
+    dc.beginPath();dc.arc(cx,cy,r,0,Math.PI*2);dc.fillStyle='#151322';dc.fill();
+    const rows=23,cols=44;
+    function point(lat,lon){return {x:cx+r*Math.cos(lat)*Math.sin(lon),y:cy+r*Math.sin(lat),z:Math.cos(lat)*Math.cos(lon)};}
+    for(let row=0;row<rows;row++){
+      const lat1=-Math.PI/2+row*Math.PI/rows+.01,lat2=-Math.PI/2+(row+1)*Math.PI/rows-.01;
+      for(let col=0;col<cols;col++){
+        const lon1=col*Math.PI*2/cols+rotation+.012,lon2=(col+1)*Math.PI*2/cols+rotation-.012;
+        const lat=(lat1+lat2)/2,lon=(lon1+lon2)/2;
+        const nx=Math.cos(lat)*Math.sin(lon),ny=Math.sin(lat),nz=Math.cos(lat)*Math.cos(lon);
+        if(nz<=.02)continue;
+        const light=Math.max(0,-nx*.48-ny*.55+nz*.68);
+        const spec=Math.pow(Math.max(0,-nx*.42-ny*.38+nz*.82),38);
+        const variation=Math.sin(row*51+col*13)*10;
+        const value=Math.min(99,16+light*56+spec*70+variation);
+        dc.fillStyle=`hsl(${245+Math.sin(col*3+row)*20} ${spec>.3?8:15}% ${value}%)`;
+        const pts=[point(lat1,lon1),point(lat1,lon2),point(lat2,lon2),point(lat2,lon1)];
+        dc.beginPath();pts.forEach((p,i)=>i?dc.lineTo(p.x,p.y):dc.moveTo(p.x,p.y));dc.closePath();dc.fill();
+      }
+    }
+    const gloss=dc.createRadialGradient(98,95,0,98,95,35);gloss.addColorStop(0,'#ffffffed');gloss.addColorStop(.15,'#fff9');gloss.addColorStop(1,'#fff0');dc.fillStyle=gloss;dc.fillRect(60,57,80,80);
+    dc.strokeStyle='#eee3ff66';dc.lineWidth=.7;dc.beginPath();dc.arc(cx,cy,r,0,Math.PI*2);dc.stroke();
+  }
+  function frame(time){
+    requestAnimationFrame(frame);
+    if(document.hidden){last=time;return;}
+    if(time-lastPaint<(calm?180:32))return;
+    const dt=Math.min((time-(last||time))/1000,.05);last=time;lastPaint=time;
+    if(ctx){ctx.clearRect(0,0,width,height);
+      for(const p of dust){if(!calm)p.y=(p.y-dt*p.v+1)%1;const alpha=.14+(Math.sin(time*.0006+p.phase)+1)*.14;ctx.fillStyle=current===3?`rgba(220,185,255,${alpha})`:`rgba(221,245,161,${alpha})`;ctx.beginPath();ctx.arc(p.x*width+(pointer.x-.5)*p.s*8,p.y*height,p.s,0,Math.PI*2);ctx.fill();}
+      if(current===3&&!calm){for(let i=0;i<14;i++){const x=width*(.5+.48*Math.sin(time*.00014+i*2.1)),y=height*(.5+.48*Math.cos(time*.00019+i*1.6));const light=ctx.createRadialGradient(x,y,0,x,y,13);light.addColorStop(0,'#e4c9ff45');light.addColorStop(1,'#e4c9ff00');ctx.fillStyle=light;ctx.fillRect(x-13,y-13,26,26);}}
+      for(const p of sparks){p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=135*dt;p.vx*=.99;p.rotation+=dt*3;ctx.globalAlpha=Math.max(0,Math.min(1,p.life));ctx.fillStyle=p.color;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rotation);ctx.fillRect(-p.size/2,-p.size/2,p.size,p.confetti?p.size*2.5:p.size);ctx.restore();}ctx.globalAlpha=1;sparks=sparks.filter(p=>p.life>0);
+    }
+    if(current===3)drawDisco(time);
+  }
+  requestAnimationFrame(frame);
+  setTimeout(()=>{if(current===0&&!calm)burst(width*.75,height*.4,45);},650);
+})();
