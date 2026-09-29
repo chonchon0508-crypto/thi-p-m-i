@@ -19,30 +19,53 @@
   app.innerHTML = `
     <div class="world" aria-hidden="true"><div class="aura gold-aura"></div><div class="aura club-aura"></div><div class="orbit"></div><div class="orbit two"></div><div class="coordinates">GOOD PEOPLE / GREAT MEMORIES / ALL THE WAY UP</div><div class="grid-floor"></div><div class="beam"></div><div class="beam b2"></div></div>
     <canvas id="particles" aria-hidden="true"></canvas>
-    <header><button class="brand" data-go="0" aria-label="Về mở màn"><span class="brand-mark">✳</span><span><strong>THE ENCORE</strong><small>OUR MOMENT. OUR NIGHT.</small></span></button><span class="edition">VĂN NGHỆ / CELEBRATION EDITION</span><div class="top-tools"><span class="live">WE DID IT, TOGETHER</span><button class="motion-toggle" aria-pressed="false">Giảm chuyển động</button></div></header>
-    <main id="main">
+    <div class="boot-intro" role="dialog" aria-modal="true" aria-label="Mở màn: System load, We Slayed">
+      <div class="boot-scanlines" aria-hidden="true"></div>
+      <div class="boot-content">
+        <p class="boot-label">ESTABLISHING CONNECTION / OUR MOMENT</p>
+        <div class="boot-title" data-text="SYSTEM LOAD…" aria-hidden="true">SYSTEM LOAD…</div>
+        <div class="boot-track" aria-hidden="true"><span></span></div>
+        <p class="boot-status" role="status">Đang khởi động đêm của chúng ta…</p>
+      </div>
+      <button class="boot-skip">Bỏ qua mở màn ↗</button>
+    </div>
+    <main id="main" inert>
       <section class="scene" data-scene="0" aria-labelledby="hero-title"><div class="intro-corner">VOL. 01 — THE VICTORY LAP</div><div class="hero-layout"><div class="hero-copy"><div class="eyebrow">Dành cho những người đã hết mình</div><h1 class="hero-title" id="hero-title" aria-label="WE SLAY."><span class="word" aria-hidden="true">${letters('WE')}</span><span class="word slay" aria-hidden="true">${letters('SLAY.',2)}</span></h1><div class="hero-bottom"><span class="little-star" aria-hidden="true">✳</span><p class="copy"><strong>Chúng ta không chỉ bước lên sân khấu.<br>Chúng ta đã để lại dấu ấn.</strong><br>Và đây là khoảnh khắc của tất cả chúng ta.</p></div><div class="actions"><button class="primary" data-go="1">MỞ KHÓA CHIẾN TÍCH <span>↗</span></button><span class="hint">01 — MỘT HÀNH TRÌNH ĐÁNG NHỚ</span></div></div><div class="hero-art" aria-hidden="true"><div class="art-ring"></div><div class="art-ring r2"></div><span class="art-cross">✦</span><span class="art-cross second">✳</span>${trophy('gold','hero-trophy')}<span class="sticker lime">100% TEAM ENERGY ↗</span><span class="sticker outline">BORN TO SHINE.</span><span class="barcode"></span><span class="art-label">THE STAGE WAS OURS. SO IS TONIGHT.</span></div></div><div class="marquee" aria-hidden="true"><div class="marquee-track">${Array.from({length:4},()=>'<span>WE SHOWED UP <b>✳</b> WE GAVE IT ALL <b>✳</b> WE MADE IT <b>✳</b> NOW WE CELEBRATE <b>✳</b></span>').join('')}</div></div></section>
       <section class="scene" data-scene="1" hidden aria-labelledby="awards-title"><div class="section-head"><div><div class="eyebrow">01 / Những nỗ lực đã thành hình</div><h2 class="section-title" id="awards-title" tabindex="-1">Hết mình.<br><em>Hái vinh quang.</em></h2></div><p class="copy">Từ những buổi tập đến ánh đèn sân khấu.<br><strong>5 giải thưởng. Một tinh thần đồng đội.</strong></p></div><div class="award-grid">${awards.map(([tone,title,label],i)=>`<article class="award-card" style="--i:${i}"><span class="award-no">${label}</span>${trophy(tone,'award-icon')}<h3>${title}</h3><p>${i===0?'MỘT KHOẢNH KHẮC VÀNG':i===4?'KHÔNG NGỪNG TIẾN LÊN':'CÙNG NHAU LÀM NÊN'}</p></article>`).join('')}</div><div class="award-total"><p>01 VÀNG &nbsp; / &nbsp; 03 ĐỒNG &nbsp; / &nbsp; 01 KHUYẾN KHÍCH</p><div class="actions"><button class="text-button" id="celebrate">Thêm một tràng pháo hoa ✳</button><button class="primary" data-go="2">GỬI NHỮNG NGƯỜI ĐỒNG ĐỘI <span>↗</span></button></div></div></section>
       <section class="scene" data-scene="2" hidden aria-labelledby="letter-title"><div class="letter-layout"><div class="letter-heading"><div class="eyebrow">02 / Behind every spotlight</div><h2 class="section-title" id="letter-title" tabindex="-1">Cúp là của đội.<br><em>Tự hào là<br>của chúng ta.</em></h2><p class="copy">Có những điều ánh đèn sân khấu không chiếu tới. Nhưng chúng ta đều nhớ.</p><span class="scribble">THIS ONE'S FOR YOU ↗</span></div><article class="letter-paper"><div class="letter-meta"><span>MỘT LÁ THƯ, THẬT LÒNG.</span><span>♥ / TO OUR TEAM</span></div><h3>Gửi những người đã cùng cháy,</h3><p>Cảm ơn những buổi tập đến quên giờ, những lần làm lại “thêm một lần nữa”, và cả những lúc mệt nhưng chẳng ai bỏ cuộc.</p><p>Từ người đứng giữa sân khấu đến những người lặng lẽ phía sau, <strong>mỗi người đều là một phần không thể thiếu</strong> của chiến thắng này.</p><p><strong>1 giải Vàng, 3 giải Đồng và 1 giải Khuyến khích.</strong> Đó là thành tích. Còn điều tuyệt nhất là chúng ta đã làm được — cùng nhau.</p><p>Sân khấu đã hạ màn. Giờ thì cất những lo lắng đi, giữ lại niềm tự hào và dành một đêm thật vui cho chính mình nhé!</p><div class="signature"><strong>Thương và tự hào về cả đội.</strong><span>✳</span></div><p class="tiny">P.S. Chương tiếp theo cần bạn lên đồ thật chất.</p></article></div><div class="actions"><button class="text-button" data-go="1">← Ngắm lại chiến tích</button><button class="primary" data-go="3">ĐỌC XONG RỒI. LÊN ĐỒ! <span>↗</span></button></div></section>
       <section class="scene" data-scene="3" hidden aria-labelledby="party-title"><div class="party-layout"><div><div class="eyebrow">03 / After the stage, after dark</div><h2 class="party-title" id="party-title" tabindex="-1">LIGHTS OFF.<span>NIGHT ON.</span></h2><span class="party-tag">HẾT DIỄN RỒI. GIỜ TỚI LƯỢT MÌNH VUI.</span><p class="copy party-copy">Một đêm để nâng ly, kể lại những pha hú hồn và ăn mừng như cách chúng ta đã diễn:<br><strong>Hết mình. Hết cỡ. Cùng nhau.</strong></p><div class="actions"><button class="primary" id="save-ticket">LƯU THÔNG TIN THIỆP <span>↗</span></button><button class="text-button" id="party-burst">Bật mood ✦</button></div><p class="hint" style="margin-top:23px"><span class="equalizer" aria-hidden="true">${Array.from({length:5},(_,i)=>`<i style="--i:${i}"></i>`).join('')}</span>GOOD VIBES ONLY / NO ONE LEFT BEHIND</p></div><div class="party-right"><div class="disco" aria-hidden="true"><canvas id="disco"></canvas><span class="disco-flare"></span></div><article class="ticket"><div class="ticket-top"><span>THE ENCORE / PRIVATE PARTY</span><span>✦ ADMIT ONE</span></div><h3>Bạn có hẹn với cả đội.</h3><div class="ticket-row"><span>NGÀY</span><strong>${escapeHTML(PARTY.date || 'Đang chốt · sẽ thông báo cùng đội')}</strong></div><div class="ticket-row"><span>GIỜ</span><strong>${escapeHTML(PARTY.time || 'Sẽ cập nhật')}</strong></div><div class="ticket-row"><span>ĐỊA ĐIỂM</span><strong>${escapeHTML(PARTY.location || 'Bật mí sau · nhớ theo dõi nhóm nhé')}</strong></div><div class="ticket-row"><span>DRESS CODE</span><strong>${escapeHTML(PARTY.dressCode)}</strong></div><div class="ticket-foot"><span>YOU ARE ON THE GUEST LIST.</span><span class="mini-bars" aria-hidden="true"></span></div></article></div></div></section>
     </main>
-    <footer><nav class="chapter-nav" aria-label="Các phần của thiệp">${['MỞ MÀN','VINH DANH','LỜI CẢM ƠN','LÊN ĐỒ'].map((name,i)=>`<button data-go="${i}" ${i===0?'class="active" aria-current="step"':''}><span class="number">0${i+1}</span>${name}</button>`).join('')}</nav><span class="footer-note">MADE OF EFFORT. FINISHED WITH LOVE. ↗</span></footer>
     <div class="transition-veil" aria-hidden="true"></div><div class="toast" role="status" aria-live="polite"></div>`;
+
+  // Layer decorative details around the existing content, keeping the reading order intact.
+  document.querySelector('.boot-intro').insertAdjacentHTML('afterbegin', '<div class="boot-orbit" aria-hidden="true"><span>✳</span></div><span class="boot-edition" aria-hidden="true">THE ENCORE / VICTORY SEQUENCE</span>');
+  document.querySelectorAll('.award-card').forEach((card,i)=>{
+    card.dataset.tone=awards[i][0];
+    card.insertAdjacentHTML('beforeend', `<span class="award-spark s1" aria-hidden="true">✦</span><span class="award-spark s2" aria-hidden="true">✧</span><span class="award-pedestal" aria-hidden="true"></span><button class="award-touch" aria-label="Ăn mừng ${awards[i][1]}${i>0&&i<4?' số '+i:''}"><span>CHẠM ĐỂ TỎA SÁNG ↗</span></button>`);
+  });
+  document.querySelector('.letter-heading').insertAdjacentHTML('beforeend', `
+    <div class="memory-stack" aria-label="Những điều làm nên chúng ta">
+      <div class="memory-card"><span>01 / THE REHEARSALS</span><strong>Tập thêm<br>một lần nữa.</strong><i aria-hidden="true">↗</i></div>
+      <div class="memory-card"><span>02 / THE MOMENT</span><strong>Cùng nhau.<br>Và làm được.</strong><i aria-hidden="true">✳</i></div>
+    </div>`);
+  document.querySelector('.letter-paper').insertAdjacentHTML('beforeend', `
+    <div class="letter-reaction"><button id="send-love" aria-pressed="false"><span aria-hidden="true">♡</span> Giữ lại một trái tim</button><span class="letter-postmark" aria-hidden="true">ALL HEART<br>ALL TEAM ✳</span></div>`);
+  document.querySelector('[data-scene="2"]').insertAdjacentHTML('afterbegin','<div class="letter-watermark" aria-hidden="true">TOGETHER.</div><span class="letter-float-star" aria-hidden="true">✳</span>');
+  const heroArt=document.querySelector('.hero-art');
+  heroArt.removeAttribute('aria-hidden');
+  heroArt.querySelectorAll('div,span').forEach(el=>el.setAttribute('aria-hidden','true'));
+  heroArt.insertAdjacentHTML('beforeend','<button class="hero-celebrate" aria-label="Chạm cúp để ăn mừng"><span>CHẠM CÚP ĐỂ ĂN MỪNG ✦</span></button>');
 
   const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
   let calm = reducedQuery.matches;
   let current = 0, switching = false, toastTimer, pointer = {x: .65, y: .3};
   const scenes = [...document.querySelectorAll('.scene')];
   const veil = document.querySelector('.transition-veil');
-  const motionButton = document.querySelector('.motion-toggle');
   function syncMotion() {
     document.body.classList.toggle('calm', calm);
-    motionButton.setAttribute('aria-pressed', String(calm));
-    motionButton.textContent = calm ? 'Bật chuyển động' : 'Giảm chuyển động';
   }
   syncMotion();
-  motionButton.addEventListener('click', () => {calm = !calm; syncMotion(); if(calm) sparks.length=0;});
-  reducedQuery.addEventListener('change', event => {calm=event.matches;syncMotion();});
+  reducedQuery.addEventListener('change', event => {calm=event.matches;syncMotion();if(calm){sparks.length=0;finishIntro();}});
   function toast(message) { clearTimeout(toastTimer); const el=document.querySelector('.toast');el.textContent=message;el.classList.add('visible');toastTimer=setTimeout(()=>el.classList.remove('visible'),3600); }
   function go(next) {
     if (switching || next === current || next < 0 || next > 3) return;
@@ -54,20 +77,38 @@
     setTimeout(() => {
       scenes[current].hidden = true;
       current=next;
+      sparks=[];
       document.body.classList.remove('mode-0','mode-1','mode-2','mode-3');
       document.body.classList.add(`mode-${next}`);
       scenes[next].hidden=false;
       scenes[next].classList.remove('enter');void scenes[next].offsetWidth;scenes[next].classList.add('enter');
       window.scrollTo({top:0,behavior:'instant'});
       const heading=scenes[next].querySelector('h1,h2');heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});
-      document.querySelectorAll('.chapter-nav button').forEach((button,i)=> {button.classList.toggle('active',i===next);if(i===next)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');});
       if(next===1 || next===3) celebrate();
+      // Release entry animation transforms so pointer tilt works after the reveal.
+      setTimeout(()=>scenes[next].classList.remove('enter'),1200);
     },calm?0:430);
     setTimeout(()=>{switching=false;veil.classList.remove('run');document.querySelectorAll('[data-go]').forEach(button=>button.disabled=false);},calm?40:950);
   }
   document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>go(Number(button.dataset.go))));
   document.querySelector('#celebrate').addEventListener('click',celebrate);
   document.querySelector('#party-burst').addEventListener('click',celebrate);
+  document.querySelector('.hero-celebrate').addEventListener('click',celebrate);
+  let lastAwardBurst=0;
+  document.querySelectorAll('.award-touch').forEach((button,i)=>button.addEventListener('click',()=>{
+    if(Date.now()-lastAwardBurst<450)return;
+    lastAwardBurst=Date.now();
+    const card=button.closest('.award-card'),box=card.getBoundingClientRect();
+    card.classList.remove('celebrating');void card.offsetWidth;card.classList.add('celebrating');
+    burst(box.left+box.width/2,box.top+box.height*.42,50);
+    toast(`${awards[i][1]} — ${['Một khoảnh khắc vàng của cả đội!','Hết mình trên từng nhịp nhạc!','Bứt phá cùng nhau!','Tỏa sáng theo cách của chúng ta!','Mỗi nỗ lực đều đáng tự hào!'][i]}`);
+  }));
+  document.querySelector('#send-love').addEventListener('click',event=>{
+    const button=event.currentTarget,loved=button.getAttribute('aria-pressed')!=='true';
+    button.setAttribute('aria-pressed',String(loved));
+    button.innerHTML=loved?'<span aria-hidden="true">♥</span> Đã giữ lại trong tim':'<span aria-hidden="true">♡</span> Giữ lại một trái tim';
+    if(loved){const box=button.getBoundingClientRect();burst(box.left+box.width/2,box.top,32);}
+  });
   document.querySelector('#save-ticket').addEventListener('click',()=> {
     const text = `THE ENCORE — THIỆP MỜI ĂN MỪNG\n\n1 Vàng · 3 Đồng · 1 Khuyến khích\n\nNgày: ${PARTY.date || 'Sẽ cập nhật'}\nGiờ: ${PARTY.time || 'Sẽ cập nhật'}\nĐịa điểm: ${PARTY.location || 'Sẽ cập nhật'}\nDress code: ${PARTY.dressCode}\n\nThương và tự hào về cả đội.\n`;
     const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
@@ -75,6 +116,17 @@
     toast('Đã tạo tệp thiệp. Ngày, giờ và địa điểm sẽ được cập nhật.');
   });
   window.addEventListener('pointermove',event=>{pointer={x:event.clientX/innerWidth,y:event.clientY/innerHeight};},{passive:true});
+  // Card lighting follows the pointer; touch and keyboard users get the same celebration buttons.
+  const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
+  document.querySelectorAll('.award-card,.letter-paper,.hero-art,.ticket').forEach(el=>{
+    el.addEventListener('pointermove',event=>{
+      if(calm||!finePointer.matches)return;
+      const rect=el.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width,y=(event.clientY-rect.top)/rect.height;
+      el.style.setProperty('--light-x',`${x*100}%`);el.style.setProperty('--light-y',`${y*100}%`);
+      el.style.setProperty('--tilt-x',`${(y-.5)*-5}deg`);el.style.setProperty('--tilt-y',`${(x-.5)*6}deg`);
+    },{passive:true});
+    el.addEventListener('pointerleave',()=>{el.style.setProperty('--tilt-x','0deg');el.style.setProperty('--tilt-y','0deg');el.style.setProperty('--light-x','50%');el.style.setProperty('--light-y','35%');});
+  });
 
   // One animation loop for ambient dust, confetti, fireworks and spherical mirrors.
   const canvas=document.querySelector('#particles'), ctx=canvas.getContext('2d');
@@ -118,12 +170,50 @@
     if(time-lastPaint<(calm?180:32))return;
     const dt=Math.min((time-(last||time))/1000,.05);last=time;lastPaint=time;
     if(ctx){ctx.clearRect(0,0,width,height);
-      for(const p of dust){if(!calm)p.y=(p.y-dt*p.v+1)%1;const alpha=.14+(Math.sin(time*.0006+p.phase)+1)*.14;ctx.fillStyle=current===3?`rgba(220,185,255,${alpha})`:`rgba(221,245,161,${alpha})`;ctx.beginPath();ctx.arc(p.x*width+(pointer.x-.5)*p.s*8,p.y*height,p.s,0,Math.PI*2);ctx.fill();}
+      for(const p of dust){if(!calm)p.y=(p.y-dt*p.v+1)%1;const alpha=calm?.25:.14+(Math.sin(time*.0006+p.phase)+1)*.14;ctx.fillStyle=current===3?`rgba(220,185,255,${alpha})`:`rgba(221,245,161,${alpha})`;ctx.beginPath();ctx.arc(p.x*width+(calm?0:(pointer.x-.5)*p.s*8),p.y*height,p.s,0,Math.PI*2);ctx.fill();}
       if(current===3&&!calm){for(let i=0;i<14;i++){const x=width*(.5+.48*Math.sin(time*.00014+i*2.1)),y=height*(.5+.48*Math.cos(time*.00019+i*1.6));const light=ctx.createRadialGradient(x,y,0,x,y,13);light.addColorStop(0,'#e4c9ff45');light.addColorStop(1,'#e4c9ff00');ctx.fillStyle=light;ctx.fillRect(x-13,y-13,26,26);}}
       for(const p of sparks){p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=135*dt;p.vx*=.99;p.rotation+=dt*3;ctx.globalAlpha=Math.max(0,Math.min(1,p.life));ctx.fillStyle=p.color;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rotation);ctx.fillRect(-p.size/2,-p.size/2,p.size,p.confetti?p.size*2.5:p.size);ctx.restore();}ctx.globalAlpha=1;sparks=sparks.filter(p=>p.life>0);
     }
     if(current===3)drawDisco(time);
   }
   requestAnimationFrame(frame);
-  setTimeout(()=>{if(current===0&&!calm)burst(width*.75,height*.4,45);},650);
+  // Loading text -> letter replacement + lime/ivory glitch -> zoom through.
+  // Timers are owned by the intro so skipping cannot leave a late overlay or locked page.
+  const intro = document.querySelector('.boot-intro');
+  const introTitle = document.querySelector('.boot-title');
+  const introStatus = document.querySelector('.boot-status');
+  const main = document.querySelector('#main');
+  const introTimers = [];
+  let introDone = false;
+  document.body.classList.add('booting');
+  function later(callback, delay) { introTimers.push(setTimeout(callback, delay)); }
+  function setIntroText(text) {introTitle.textContent=text;introTitle.dataset.text=text;}
+  function finishIntro() {
+    if(introDone)return;
+    introDone=true;
+    introTimers.forEach(clearTimeout);
+    intro.remove();
+    main.inert=false;
+    document.body.classList.remove('booting');
+    const heading=document.querySelector('#hero-title');
+    heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});
+    if(!calm)burst(width*.75,height*.4,60);
+  }
+  document.querySelector('.boot-skip').addEventListener('click',finishIntro);
+  intro.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){event.preventDefault();finishIntro();}
+    if(event.key==='Tab'){event.preventDefault();document.querySelector('.boot-skip')?.focus();}
+  });
+  document.querySelector('.boot-skip').focus({preventScroll:true});
+  if(calm){
+    later(()=>{setIntroText('WE SLAYED');introStatus.textContent='Khoảnh khắc này là của chúng ta.';},350);
+    later(finishIntro,1000);
+  }else{
+    const from='SYSTEM LOAD…',to='WE SLAYED',steps=Math.max(from.length,to.length);
+    later(()=>{intro.classList.add('morphing');introStatus.textContent='Connection established. Victory unlocked.';},1500);
+    for(let i=1;i<=steps;i++)later(()=>setIntroText(to.slice(0,i)+from.slice(i)),1500+i*1000/steps);
+    later(()=>{setIntroText(to);intro.classList.remove('morphing');intro.classList.add('resolved');introStatus.textContent='Khoảnh khắc này là của chúng ta.';},2500);
+    later(()=>intro.classList.add('zooming'),3000);
+    later(finishIntro,4000);
+  }
 })();

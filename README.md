@@ -10,5 +10,9 @@ Sửa `PARTY` ở đầu `thiep.jsx` để điền ngày, giờ, địa điểm 
 
 Nếu muốn chạy qua HTTP: `python3 -m http.server 8080`, sau đó mở `http://localhost:8080`.
 
-Điều hướng bằng các nút chính hoặc bốn nút chương ở chân trang. Trên màn hình nhỏ vẫn cuộn được nội dung dài trong từng chương. Nút giảm chuyển động và thiết lập hệ điều hành được hỗ trợ. Không tự phát âm thanh.
+Mở trang sẽ chạy intro khoảng 4 giây: SYSTEM LOAD… → WE SLAYED → phóng chữ để mở nội dung. Có thể bỏ qua bằng nút hoặc phím Escape. Tự giảm hiệu ứng theo thiết lập giảm chuyển động của hệ điều hành.
+
+Điều hướng bằng các nút trong từng phần; không có thanh đầu trang hoặc thanh chương ở chân trang. Trên màn hình nhỏ vẫn cuộn được nội dung dài trong từng phần. Không tự phát âm thanh.
+
+Intro dùng cùng tông đen–lime/ngà với trang đầu. Chạm cúp để ăn mừng, rê chuột lên thẻ cúp/thư để đổi góc sáng; nút trái tim trong thư chỉ phản hồi tại trang, không gửi dữ liệu và không lưu sau khi tải lại. Các nút hỗ trợ bàn phím. Chuyển động và hiệu ứng nghiêng tự giảm theo thiết lập hệ điều hành.
 # thi-p-m-i
