@@ -1,4 +1,4 @@
-# THE ENCORE — Thiệp ăn mừng
+# THE ENCORE, Thiệp ăn mừng
 
 Mở `index.html` bằng trình duyệt. Không cần cài Node, React hoặc GSAP.
 
@@ -6,7 +6,9 @@ Mở `index.html` bằng trình duyệt. Không cần cài Node, React hoặc GS
 - `style.css`: bố cục responsive, màu sắc, font và hiệu ứng.
 - `index.html`: điểm mở trang. Font Google là tùy chọn; khi mất mạng có font hệ thống dự phòng.
 
-Sửa `PARTY` ở đầu `thiep.jsx` để điền ngày, giờ, địa điểm và dress code. Giá trị `null` hiển thị thông báo đang cập nhật. Nút lưu thiệp tải tệp văn bản, không gửi RSVP hay dữ liệu đến máy chủ.
+Sửa `PARTY.date` ở đầu `thiep.jsx` để điền ngày tổ chức. `STOPS` chứa hai tăng, tăng 1 lúc 19:00 tại The Gangs Central, tăng 2 lúc 23:00 với địa điểm club chờ thông báo. Hai phong bì kính mở/gấp riêng, chuyển bằng nút lên/xuống hoặc phím mũi tên khi tập trung vào cụm điều khiển.
+
+Nút “Xác nhận tham gia” lật thành “🔥 Game On!” và lưu lựa chọn bằng localStorage. Nhấn lại để bỏ xác nhận. Đây là phản hồi trên thiết bị, chưa gửi đăng ký đến ban tổ chức. Nếu trình duyệt chặn lưu trữ, lựa chọn chỉ tồn tại trong lần mở trang đó.
 
 Nếu muốn chạy qua HTTP: `python3 -m http.server 8080`, sau đó mở `http://localhost:8080`.
 

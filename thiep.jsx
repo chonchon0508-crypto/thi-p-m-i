@@ -1,10 +1,14 @@
 /* Browser-native JavaScript, intentionally valid without JSX compilation.
  * Open index.html directly. No React, GSAP or icon-library dependency.
- * Replace the three null values below when the party details are confirmed.
+ * Fill PARTY.date and the second venue when those details are confirmed.
  */
 (() => {
   'use strict';
-  const PARTY = { date: null, time: null, location: null, dressCode: 'Lên đồ thật chất. Mang theo năng lượng thật cháy.' };
+  const PARTY = { date: null, dressCode: 'Lên đồ thật chất. Mang theo năng lượng thật cháy.' };
+  const STOPS = [
+    { theme: 'amber', time: '19:00', title: 'The Gangs Central', kicker: 'Nâng ly cùng đồng đội', address: '87 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP. HCM', note: 'Gặp nhau, ăn thật ngon và nâng ly cho những gì chúng ta đã cùng làm được.' },
+    { theme: 'violet', time: '23:00', title: 'Hẹn nhau dưới ánh đèn', kicker: 'Đêm còn dài, mình còn cháy', address: 'Địa điểm club sẽ được bật mí sớm trong nhóm. Cứ lên đồ, phần còn lại để cả đội lo.', note: 'Sau bữa tiệc, mình nối tiếp cuộc vui bằng âm nhạc và những bước nhảy hết mình.' }
+  ];
   const app = document.getElementById('app');
   if (!app) return;
   const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -15,7 +19,36 @@
     return `<svg class="${cls}" viewBox="0 0 240 280" fill="none" aria-hidden="true"><defs><linearGradient id="${id}" x1="43" y1="80" x2="196" y2="125" gradientUnits="userSpaceOnUse"><stop stop-color="${colors[0]}"/><stop offset=".27" stop-color="${colors[1]}"/><stop offset=".55" stop-color="${colors[2]}"/><stop offset=".82" stop-color="${colors[1]}"/><stop offset="1" stop-color="${colors[3]}"/></linearGradient></defs><g stroke="${colors[1]}" stroke-width="9"><path d="M65 61H30v30c0 35 22 51 49 51"/><path d="M175 61h35v30c0 35-22 51-49 51"/></g><path d="M60 43h120l-9 70c-3 32-20 49-44 55v35h27v17H86v-17h27v-35c-24-6-41-23-44-55z" fill="url(#${id})"/><ellipse cx="120" cy="43" rx="60" ry="12" fill="${colors[3]}"/><ellipse cx="120" cy="43" rx="50" ry="6" fill="${colors[2]}"/><path d="M79 59l7 49c3 20 9 31 17 37" stroke="white" stroke-opacity=".45" stroke-width="4"/><path d="m120 73 7 15 17 2-12 12 3 17-15-8-15 8 3-17-12-12 17-2z" fill="${colors[0]}" opacity=".8"/><path d="M76 221h88l9 27H67z" fill="url(#${id})"/><rect x="63" y="246" width="114" height="13" rx="3" fill="${colors[2]}"/><rect x="92" y="228" width="56" height="14" rx="1" fill="${colors[0]}" opacity=".7"/></svg>`;
   }
   const letters = (text, offset=0) => [...text].map((letter,i)=>`<span class="jump" style="--i:${i+offset}">${letter}</span>`).join('');
-  const awards = [ ['gold','Giải Vàng','01 / RỰC RỠ NHẤT'], ['bronze','Giải Đồng','02 / HẾT MÌNH'], ['bronze','Giải Đồng','03 / BỨT PHÁ'], ['bronze','Giải Đồng','04 / TỎA SÁNG'], ['silver','Khuyến khích','05 / ĐÁNG TỰ HÀO'] ];
+  const awards = [
+    ['gold','Giải Nhất','01 / RỰC RỠ NHẤT','Hành Trình Khát Vọng'],
+    ['bronze','Giải Ba','02 / HẾT MÌNH','Tốp ca Chí Lớn Dựng Cơ Đồ'],
+    ['bronze','Giải Ba','03 / BỨT PHÁ','Tứ ca Giọt Tiềm Năng'],
+    ['bronze','Giải Ba','04 / TỎA SÁNG','Sáng tác Nhạc Giọt Tiềm Năng'],
+    ['silver','Khuyến khích','05 / ĐÁNG TỰ HÀO','Sáng tác Nhạc Chí Lớn Dựng Cơ Đồ']
+  ];
+  function renderInvitations() {
+    return `<div class="invitation-deck" aria-label="Lịch hẹn hai tăng">
+      <div class="invitation-window">${STOPS.map((stop,i)=>`
+        <article class="invitation ${stop.theme}" data-stop="${i}" ${i?'hidden':''}>
+          <button class="envelope-cover" aria-expanded="false" aria-controls="invite-details-${i}">
+            <span class="envelope-top">THE ENCORE / TĂNG 0${i+1}<b>${stop.time}</b></span>
+            <span class="envelope-flap" aria-hidden="true"></span>
+            <span class="envelope-seal" aria-hidden="true">✳</span>
+            <span class="envelope-caption"><strong>${stop.kicker}</strong><span>CHẠM ĐỂ MỞ THIỆP ↗</span></span>
+          </button>
+          <div class="invite-details" id="invite-details-${i}" hidden>
+            <div class="ticket-top"><span>TĂNG 0${i+1} / ${i?'AFTER HOURS':'DINNER & CHEERS'}</span><span>✦ YOU’RE INVITED</span></div>
+            <div class="invite-heading"><span class="invite-time">${stop.time}</span><button class="close-envelope" aria-label="Gấp lại thiệp tăng ${i+1}">Gấp thiệp ↙</button></div>
+            <h3>${stop.title}</h3><p class="invite-address">${stop.address}</p>
+            <p class="invite-note">${stop.note}</p>
+            <div class="invite-meta"><span>NGÀY HẸN</span><strong>${escapeHTML(PARTY.date||'Sẽ thông báo trong nhóm')}</strong></div>
+            <div class="invite-meta"><span>DRESS CODE</span><strong>${escapeHTML(PARTY.dressCode)}</strong></div>
+            <div class="ticket-foot"><span>ĐỦ MẶT MỚI ĐỦ VUI.</span><span class="mini-bars" aria-hidden="true"></span></div>
+          </div>
+        </article>`).join('')}</div>
+      <div class="invitation-controls"><span class="stop-count" role="status" aria-live="polite">01 / 02 · TĂNG 1</span><div><button id="previous-stop" aria-label="Xem thiệp tăng 1" disabled>↑</button><button id="next-stop" aria-label="Xem thiệp tăng 2">↓</button></div></div>
+    </div>`;
+  }
   app.innerHTML = `
     <div class="world" aria-hidden="true"><div class="aura gold-aura"></div><div class="aura club-aura"></div><div class="orbit"></div><div class="orbit two"></div><div class="coordinates">GOOD PEOPLE / GREAT MEMORIES / ALL THE WAY UP</div><div class="grid-floor"></div><div class="beam"></div><div class="beam b2"></div></div>
     <canvas id="particles" aria-hidden="true"></canvas>
@@ -30,10 +63,10 @@
       <button class="boot-skip">Bỏ qua mở màn ↗</button>
     </div>
     <main id="main" inert>
-      <section class="scene" data-scene="0" aria-labelledby="hero-title"><div class="intro-corner">VOL. 01 — THE VICTORY LAP</div><div class="hero-layout"><div class="hero-copy"><div class="eyebrow">Dành cho những người đã hết mình</div><h1 class="hero-title" id="hero-title" aria-label="WE SLAY."><span class="word" aria-hidden="true">${letters('WE')}</span><span class="word slay" aria-hidden="true">${letters('SLAY.',2)}</span></h1><div class="hero-bottom"><span class="little-star" aria-hidden="true">✳</span><p class="copy"><strong>Chúng ta không chỉ bước lên sân khấu.<br>Chúng ta đã để lại dấu ấn.</strong><br>Và đây là khoảnh khắc của tất cả chúng ta.</p></div><div class="actions"><button class="primary" data-go="1">MỞ KHÓA CHIẾN TÍCH <span>↗</span></button><span class="hint">01 — MỘT HÀNH TRÌNH ĐÁNG NHỚ</span></div></div><div class="hero-art" aria-hidden="true"><div class="art-ring"></div><div class="art-ring r2"></div><span class="art-cross">✦</span><span class="art-cross second">✳</span>${trophy('gold','hero-trophy')}<span class="sticker lime">100% TEAM ENERGY ↗</span><span class="sticker outline">BORN TO SHINE.</span><span class="barcode"></span><span class="art-label">THE STAGE WAS OURS. SO IS TONIGHT.</span></div></div><div class="marquee" aria-hidden="true"><div class="marquee-track">${Array.from({length:4},()=>'<span>WE SHOWED UP <b>✳</b> WE GAVE IT ALL <b>✳</b> WE MADE IT <b>✳</b> NOW WE CELEBRATE <b>✳</b></span>').join('')}</div></div></section>
-      <section class="scene" data-scene="1" hidden aria-labelledby="awards-title"><div class="section-head"><div><div class="eyebrow">01 / Những nỗ lực đã thành hình</div><h2 class="section-title" id="awards-title" tabindex="-1">Hết mình.<br><em>Hái vinh quang.</em></h2></div><p class="copy">Từ những buổi tập đến ánh đèn sân khấu.<br><strong>5 giải thưởng. Một tinh thần đồng đội.</strong></p></div><div class="award-grid">${awards.map(([tone,title,label],i)=>`<article class="award-card" style="--i:${i}"><span class="award-no">${label}</span>${trophy(tone,'award-icon')}<h3>${title}</h3><p>${i===0?'MỘT KHOẢNH KHẮC VÀNG':i===4?'KHÔNG NGỪNG TIẾN LÊN':'CÙNG NHAU LÀM NÊN'}</p></article>`).join('')}</div><div class="award-total"><p>01 VÀNG &nbsp; / &nbsp; 03 ĐỒNG &nbsp; / &nbsp; 01 KHUYẾN KHÍCH</p><div class="actions"><button class="text-button" id="celebrate">Thêm một tràng pháo hoa ✳</button><button class="primary" data-go="2">GỬI NHỮNG NGƯỜI ĐỒNG ĐỘI <span>↗</span></button></div></div></section>
-      <section class="scene" data-scene="2" hidden aria-labelledby="letter-title"><div class="letter-layout"><div class="letter-heading"><div class="eyebrow">02 / Behind every spotlight</div><h2 class="section-title" id="letter-title" tabindex="-1">Cúp là của đội.<br><em>Tự hào là<br>của chúng ta.</em></h2><p class="copy">Có những điều ánh đèn sân khấu không chiếu tới. Nhưng chúng ta đều nhớ.</p><span class="scribble">THIS ONE'S FOR YOU ↗</span></div><article class="letter-paper"><div class="letter-meta"><span>MỘT LÁ THƯ, THẬT LÒNG.</span><span>♥ / TO OUR TEAM</span></div><h3>Gửi những người đã cùng cháy,</h3><p>Cảm ơn những buổi tập đến quên giờ, những lần làm lại “thêm một lần nữa”, và cả những lúc mệt nhưng chẳng ai bỏ cuộc.</p><p>Từ người đứng giữa sân khấu đến những người lặng lẽ phía sau, <strong>mỗi người đều là một phần không thể thiếu</strong> của chiến thắng này.</p><p><strong>1 giải Vàng, 3 giải Đồng và 1 giải Khuyến khích.</strong> Đó là thành tích. Còn điều tuyệt nhất là chúng ta đã làm được — cùng nhau.</p><p>Sân khấu đã hạ màn. Giờ thì cất những lo lắng đi, giữ lại niềm tự hào và dành một đêm thật vui cho chính mình nhé!</p><div class="signature"><strong>Thương và tự hào về cả đội.</strong><span>✳</span></div><p class="tiny">P.S. Chương tiếp theo cần bạn lên đồ thật chất.</p></article></div><div class="actions"><button class="text-button" data-go="1">← Ngắm lại chiến tích</button><button class="primary" data-go="3">ĐỌC XONG RỒI. LÊN ĐỒ! <span>↗</span></button></div></section>
-      <section class="scene" data-scene="3" hidden aria-labelledby="party-title"><div class="party-layout"><div><div class="eyebrow">03 / After the stage, after dark</div><h2 class="party-title" id="party-title" tabindex="-1">LIGHTS OFF.<span>NIGHT ON.</span></h2><span class="party-tag">HẾT DIỄN RỒI. GIỜ TỚI LƯỢT MÌNH VUI.</span><p class="copy party-copy">Một đêm để nâng ly, kể lại những pha hú hồn và ăn mừng như cách chúng ta đã diễn:<br><strong>Hết mình. Hết cỡ. Cùng nhau.</strong></p><div class="actions"><button class="primary" id="save-ticket">LƯU THÔNG TIN THIỆP <span>↗</span></button><button class="text-button" id="party-burst">Bật mood ✦</button></div><p class="hint" style="margin-top:23px"><span class="equalizer" aria-hidden="true">${Array.from({length:5},(_,i)=>`<i style="--i:${i}"></i>`).join('')}</span>GOOD VIBES ONLY / NO ONE LEFT BEHIND</p></div><div class="party-right"><div class="disco" aria-hidden="true"><canvas id="disco"></canvas><span class="disco-flare"></span></div><article class="ticket"><div class="ticket-top"><span>THE ENCORE / PRIVATE PARTY</span><span>✦ ADMIT ONE</span></div><h3>Bạn có hẹn với cả đội.</h3><div class="ticket-row"><span>NGÀY</span><strong>${escapeHTML(PARTY.date || 'Đang chốt · sẽ thông báo cùng đội')}</strong></div><div class="ticket-row"><span>GIỜ</span><strong>${escapeHTML(PARTY.time || 'Sẽ cập nhật')}</strong></div><div class="ticket-row"><span>ĐỊA ĐIỂM</span><strong>${escapeHTML(PARTY.location || 'Bật mí sau · nhớ theo dõi nhóm nhé')}</strong></div><div class="ticket-row"><span>DRESS CODE</span><strong>${escapeHTML(PARTY.dressCode)}</strong></div><div class="ticket-foot"><span>YOU ARE ON THE GUEST LIST.</span><span class="mini-bars" aria-hidden="true"></span></div></article></div></div></section>
+      <section class="scene" data-scene="0" aria-labelledby="hero-title"><div class="intro-corner">VOL. 01 / THE VICTORY LAP</div><div class="hero-layout"><div class="hero-copy"><div class="eyebrow">Dành cho những người đã hết mình</div><h1 class="hero-title" id="hero-title" aria-label="WE SLAY."><span class="word" aria-hidden="true">${letters('WE')}</span><span class="word slay" aria-hidden="true">${letters('SLAY.',2)}</span></h1><div class="hero-bottom"><span class="little-star" aria-hidden="true">✳</span><p class="copy"><strong>Chúng ta không chỉ bước lên sân khấu.<br>Chúng ta đã để lại dấu ấn.</strong><br>Và đây là khoảnh khắc của tất cả chúng ta.</p></div><div class="actions"><button class="primary" data-go="1">MỞ KHÓA CHIẾN TÍCH <span>↗</span></button><span class="hint">01 / MỘT HÀNH TRÌNH ĐÁNG NHỚ</span></div></div><div class="hero-art" aria-hidden="true"><div class="art-ring"></div><div class="art-ring r2"></div><span class="art-cross">✦</span><span class="art-cross second">✳</span>${trophy('gold','hero-trophy')}<span class="sticker lime">100% TEAM ENERGY ↗</span><span class="sticker outline">BORN TO SHINE.</span><span class="barcode"></span><span class="art-label">THE STAGE WAS OURS. SO IS TONIGHT.</span></div></div><div class="marquee" aria-hidden="true"><div class="marquee-track">${Array.from({length:4},()=>'<span>WE SHOWED UP <b>✳</b> WE GAVE IT ALL <b>✳</b> WE MADE IT <b>✳</b> NOW WE CELEBRATE <b>✳</b></span>').join('')}</div></div></section>
+      <section class="scene" data-scene="1" hidden aria-labelledby="awards-title"><div class="section-head"><div><div class="eyebrow">01 / Những nỗ lực đã thành hình</div><h2 class="section-title" id="awards-title" tabindex="-1">Hết mình.<br><em>Hái vinh quang.</em></h2></div><p class="copy">Từ những buổi tập đến ánh đèn sân khấu.<br><strong>5 giải thưởng. Một tinh thần đồng đội.</strong></p></div><div class="award-grid">${awards.map(([tone,title,label,performance],i)=>`<article class="award-card" style="--i:${i}"><span class="award-no">${label}</span>${trophy(tone,'award-icon')}<h3>${title}</h3><p class="performance-name">${performance}</p></article>`).join('')}</div><div class="award-total"><p>01 NHẤT &nbsp; / &nbsp; 03 BA &nbsp; / &nbsp; 01 KHUYẾN KHÍCH</p><div class="actions"><button class="text-button" id="celebrate">Thêm một tràng pháo hoa ✳</button><button class="primary" data-go="2">GỬI NHỮNG NGƯỜI ĐỒNG ĐỘI <span>↗</span></button></div></div></section>
+      <section class="scene" data-scene="2" hidden aria-labelledby="letter-title"><div class="letter-layout"><div class="letter-heading"><div class="eyebrow">02 / Behind every spotlight</div><h2 class="section-title" id="letter-title" tabindex="-1">Cúp là của đội.<br><em>Tự hào là<br>của chúng ta.</em></h2><p class="copy">Có những điều ánh đèn sân khấu không chiếu tới. Nhưng chúng ta đều nhớ.</p><span class="scribble">THIS ONE'S FOR YOU ↗</span></div><article class="letter-paper"><div class="letter-meta"><span>MỘT LÁ THƯ, THẬT LÒNG.</span><span>♥ / TO OUR TEAM</span></div><h3>Gửi những người đã cùng cháy,</h3><p>Cảm ơn những buổi tập đến quên giờ, những lần làm lại “thêm một lần nữa”, và cả những lúc mệt nhưng chẳng ai bỏ cuộc.</p><p>Từ người đứng giữa sân khấu đến những người lặng lẽ phía sau, <strong>mỗi người đều là một phần không thể thiếu</strong> của chiến thắng này.</p><p><strong>1 giải Nhất, 3 giải Ba và 1 giải Khuyến khích.</strong> Đó là thành tích. Còn điều tuyệt nhất là chúng ta đã cùng nhau làm được.</p><p>Sân khấu đã hạ màn. Giờ thì cất những lo lắng đi, giữ lại niềm tự hào và dành một đêm thật vui cho chính mình nhé!</p><div class="signature"><strong>Thương và tự hào về cả đội.</strong><span>✳</span></div><p class="tiny">P.S. Chương tiếp theo cần bạn lên đồ thật chất.</p></article></div><div class="actions"><button class="text-button" data-go="1">← Ngắm lại chiến tích</button><button class="primary fire-button" data-go="3"><span class="fire-label">ĐỌC XONG RỒI. LÊN ĐỒ! ↗</span><span class="button-flames" aria-hidden="true">${Array.from({length:12},(_,i)=>`<i style="--f:${i}"></i>`).join('')}</span></button></div></section>
+      <section class="scene" data-scene="3" hidden aria-labelledby="party-title"><div class="party-layout"><div><div class="eyebrow">03 / After the stage, after dark</div><h2 class="party-title" id="party-title" tabindex="-1">LIGHTS OFF.<span>NIGHT ON.</span></h2><span class="party-tag">HẾT DIỄN RỒI. GIỜ TỚI LƯỢT MÌNH VUI.</span><p class="copy party-copy">Một đêm để nâng ly, kể lại những pha hú hồn và ăn mừng như cách chúng ta đã diễn:<br><strong>Hết mình. Hết cỡ. Cùng nhau.</strong></p><div class="actions"><button class="rsvp-button" id="confirm-attendance" aria-pressed="false" aria-describedby="rsvp-note"><span class="rsvp-inner"><span class="rsvp-front">🔥 XÁC NHẬN THAM GIA</span><span class="rsvp-back" aria-hidden="true">🔥 Game On!</span></span></button><button class="text-button" id="party-burst">Bật mood ✦</button></div><p class="rsvp-note" id="rsvp-note" role="status">Xác nhận được lưu trên thiết bị này, chưa gửi tới ban tổ chức.</p><p class="hint" style="margin-top:23px"><span class="equalizer" aria-hidden="true">${Array.from({length:5},(_,i)=>`<i style="--i:${i}"></i>`).join('')}</span>GOOD VIBES ONLY / NO ONE LEFT BEHIND</p></div><div class="party-right"><div class="disco" aria-hidden="true"><canvas id="disco"></canvas><span class="disco-flare"></span></div>${renderInvitations()}</div></div></section>
     </main>
     <div class="transition-veil" aria-hidden="true"></div><div class="toast" role="status" aria-live="polite"></div>`;
 
@@ -101,7 +134,7 @@
     const card=button.closest('.award-card'),box=card.getBoundingClientRect();
     card.classList.remove('celebrating');void card.offsetWidth;card.classList.add('celebrating');
     burst(box.left+box.width/2,box.top+box.height*.42,50);
-    toast(`${awards[i][1]} — ${['Một khoảnh khắc vàng của cả đội!','Hết mình trên từng nhịp nhạc!','Bứt phá cùng nhau!','Tỏa sáng theo cách của chúng ta!','Mỗi nỗ lực đều đáng tự hào!'][i]}`);
+    toast(`${awards[i][1]}, ${awards[i][3]}. Tự hào về cả đội!`);
   }));
   document.querySelector('#send-love').addEventListener('click',event=>{
     const button=event.currentTarget,loved=button.getAttribute('aria-pressed')!=='true';
@@ -109,11 +142,62 @@
     button.innerHTML=loved?'<span aria-hidden="true">♥</span> Đã giữ lại trong tim':'<span aria-hidden="true">♡</span> Giữ lại một trái tim';
     if(loved){const box=button.getBoundingClientRect();burst(box.left+box.width/2,box.top,32);}
   });
-  document.querySelector('#save-ticket').addEventListener('click',()=> {
-    const text = `THE ENCORE — THIỆP MỜI ĂN MỪNG\n\n1 Vàng · 3 Đồng · 1 Khuyến khích\n\nNgày: ${PARTY.date || 'Sẽ cập nhật'}\nGiờ: ${PARTY.time || 'Sẽ cập nhật'}\nĐịa điểm: ${PARTY.location || 'Sẽ cập nhật'}\nDress code: ${PARTY.dressCode}\n\nThương và tự hào về cả đội.\n`;
-    const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
-    const link=document.createElement('a');link.href=url;link.download='The-Encore-Thiep-moi.txt';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
-    toast('Đã tạo tệp thiệp. Ngày, giờ và địa điểm sẽ được cập nhật.');
+  const rsvpButton=document.querySelector('#confirm-attendance');
+  const rsvpNote=document.querySelector('#rsvp-note');
+  const rsvpKey='the-encore-attendance-v1';
+  let confirmed=false;
+  try{confirmed=localStorage.getItem(rsvpKey)==='yes';}catch{}
+  function displayConfirmation(){
+    rsvpButton.classList.toggle('confirmed',confirmed);
+    rsvpButton.setAttribute('aria-pressed',String(confirmed));
+    rsvpButton.setAttribute('aria-label',confirmed?'Game On! Nhấn để bỏ xác nhận':'Xác nhận tham gia');
+    rsvpButton.querySelector('.rsvp-front').setAttribute('aria-hidden',String(confirmed));
+    rsvpButton.querySelector('.rsvp-back').setAttribute('aria-hidden',String(!confirmed));
+    rsvpNote.textContent=confirmed?'Bạn đã chọn tham gia trên thiết bị này. Nhắn vào nhóm để cả đội biết nhé!':'Xác nhận được lưu trên thiết bị này, chưa gửi tới ban tổ chức.';
+  }
+  displayConfirmation();
+  rsvpButton.addEventListener('click',()=>{
+    confirmed=!confirmed;displayConfirmation();
+    try{localStorage.setItem(rsvpKey,confirmed?'yes':'no');}catch{rsvpNote.textContent='Lựa chọn chỉ được giữ trong lần mở trang này. Nhắn vào nhóm để cả đội biết nhé!';}
+    if(confirmed)celebrate();
+  });
+  const invitations=[...document.querySelectorAll('.invitation')];
+  let activeStop=0,envelopeBusy=false,stopBusy=false;
+  const prevStop=document.querySelector('#previous-stop'),nextStop=document.querySelector('#next-stop');
+  function updateStopButtons(){prevStop.disabled=activeStop===0||envelopeBusy||stopBusy;nextStop.disabled=activeStop===1||envelopeBusy||stopBusy;}
+  invitations.forEach(card=>{
+    const cover=card.querySelector('.envelope-cover'),details=card.querySelector('.invite-details');
+    cover.addEventListener('click',()=>{
+      if(envelopeBusy||stopBusy)return;
+      envelopeBusy=true;cover.disabled=true;cover.classList.add('unsealing');updateStopButtons();
+      setTimeout(()=>{
+        cover.hidden=true;cover.disabled=false;cover.setAttribute('aria-expanded','true');
+        details.hidden=false;card.classList.add('is-open');
+        details.querySelector('.close-envelope').focus({preventScroll:true});
+        envelopeBusy=false;updateStopButtons();
+      },calm?0:550);
+    });
+    card.querySelector('.close-envelope').addEventListener('click',()=>{
+      details.hidden=true;cover.hidden=false;cover.classList.remove('unsealing');cover.setAttribute('aria-expanded','false');card.classList.remove('is-open');cover.focus({preventScroll:true});
+    });
+  });
+  function selectStop(next){
+    if(next===activeStop||next<0||next>=invitations.length||envelopeBusy||stopBusy)return;
+    const direction=next>activeStop?1:-1;
+    invitations[activeStop].hidden=true;activeStop=next;
+    const card=invitations[next];card.style.setProperty('--slide-from',`${direction*45}px`);card.hidden=false;
+    card.classList.remove('stop-arrive');void card.offsetWidth;card.classList.add('stop-arrive');
+    document.querySelector('.stop-count').textContent=`0${next+1} / 02 · TĂNG ${next+1}`;
+    stopBusy=true;updateStopButtons();
+    setTimeout(()=>{
+      stopBusy=false;card.classList.remove('stop-arrive');updateStopButtons();
+      card.querySelector(card.classList.contains('is-open')?'.close-envelope':'.envelope-cover').focus({preventScroll:true});
+    },calm?0:450);
+  }
+  prevStop.addEventListener('click',()=>selectStop(activeStop-1));
+  nextStop.addEventListener('click',()=>selectStop(activeStop+1));
+  document.querySelector('.invitation-controls').addEventListener('keydown',event=>{
+    if(event.key==='ArrowUp'||event.key==='ArrowDown'){event.preventDefault();selectStop(activeStop+(event.key==='ArrowDown'?1:-1));}
   });
   window.addEventListener('pointermove',event=>{pointer={x:event.clientX/innerWidth,y:event.clientY/innerHeight};},{passive:true});
   // Card lighting follows the pointer; touch and keyboard users get the same celebration buttons.
@@ -136,7 +220,7 @@
   function resize(){width=innerWidth;height=innerHeight;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx?.setTransform(dpr,0,0,dpr,0,0);disco.width=disco.height=280*dpr;dc?.setTransform(dpr,0,0,dpr,0,0);}
   window.addEventListener('resize',resize,{passive:true});resize();
   function burst(x,y,count=65){if(calm)return;const palette=current===3?['#d4b0ff','#fff','#ff87bd','#d8ff3e']:['#ffdd75','#d8ff3e','#fff3c1','#e6a168'];for(let i=0;i<count;i++){const angle=Math.random()*Math.PI*2,speed=90+Math.random()*280;sparks.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-80,life:1.1+Math.random()*1.3,total:2.4,color:palette[i%4],size:2+Math.random()*4,rotation:Math.random()*6,confetti:i%3===0});}sparks=sparks.slice(-400);}
-  function celebrate(){if(calm){toast('✦ 1 Vàng · 3 Đồng · 1 Khuyến khích. Tự hào về cả đội!');return;}burst(width*.25,height*.35);burst(width*.73,height*.28);}
+  function celebrate(){if(calm){toast('✦ 1 Nhất · 3 Ba · 1 Khuyến khích. Tự hào về cả đội!');return;}burst(width*.25,height*.35);burst(width*.73,height*.28);}
   // Project tile corners on a sphere, cull its back side, shade by rotating normal.
   function drawDisco(time){
     if(!dc)return;dc.clearRect(0,0,280,280);

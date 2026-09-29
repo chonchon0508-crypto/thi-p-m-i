@@ -130,3 +130,70 @@ body.booting .jump{animation-play-state:paused}
 @keyframes paper-arrive{from{opacity:0;transform:translateY(30px) rotate(-3deg)}to{opacity:1;transform:rotate(1deg)}}
 @media(max-width:600px){.award-card:first-child{padding-bottom:36px}.award-card:first-child .award-pedestal{left:12%;width:25%;top:78%}.award-card:first-child .s1{left:17%}.award-card:first-child .s2{right:60%}.award-touch span{font-size:6px;letter-spacing:.7px}.memory-stack{max-width:310px;margin-top:25px}.memory-card{min-height:125px}.memory-card strong{font-size:16px}.letter-reaction{gap:8px}#send-love{font-size:9px;padding:9px}.letter-postmark{font-size:11px;padding:12px 8px}.letter-paper{box-shadow:5px 5px 0 #222b16,6px 6px 0 #d8ff3e55,0 20px 35px #0003}.letter-watermark{top:3%}.boot-edition{font-size:7px}.boot-orbit{width:90vw}.hero-celebrate span{font-size:6px;opacity:.7}.hero-art{transform:none}}
 @media(prefers-reduced-motion:reduce){.boot-title,.boot-intro.resolved .boot-title{text-shadow:none}.award-card,.award-card:hover,.letter-paper,.hero-art{transform:none!important}}
+
+/* Named performances keep their full titles readable on every trophy card. */
+.award-card .performance-name{font-size:12px;line-height:1.65;letter-spacing:0;text-wrap:balance;min-height:60px;padding:0 8px;color:#d6d6c8}
+.award-pedestal{top:191px}
+.award-card{padding-bottom:48px}
+
+/* Flames sit outside the button, leaving its label unobstructed. */
+.primary.fire-button{overflow:visible;isolation:isolate;transition:box-shadow .3s,background .3s,transform .3s}
+.fire-button:after{display:none}
+.fire-button .fire-label{font:inherit;position:relative;z-index:2}
+.fire-button .button-flames{position:absolute;inset:-8px -5px;z-index:-1;pointer-events:none;opacity:0;transition:opacity .25s}
+.button-flames i{position:absolute;left:calc(var(--f)*8.3%);bottom:0;width:22px;height:43px;border-radius:70% 15% 65% 35%;background:linear-gradient(0deg,#ff4d00,#ffb000 55%,#fff7ad);filter:drop-shadow(0 0 8px #ff7300);transform-origin:50% 100%;animation:button-fire .7s ease-in-out infinite alternate;animation-delay:calc(var(--f)*-.11s)}
+.button-flames i:nth-child(even){bottom:auto;top:-17px;height:34px}
+.fire-button:hover,.fire-button:focus-visible,.fire-button:active{background:#ffcc60;box-shadow:0 0 22px #ff8a0066,0 0 50px #ff4d002b}
+.fire-button:hover .button-flames,.fire-button:focus-visible .button-flames,.fire-button:active .button-flames{opacity:1}
+@keyframes button-fire{from{transform:scale(.7,.65) rotate(-12deg);opacity:.65}to{transform:scale(1.1,1.3) rotate(12deg);opacity:1}}
+
+.rsvp-button{padding:0;position:relative;min-width:240px;height:56px;background:transparent;perspective:800px;color:#17111d;font-weight:800;font-size:11px;letter-spacing:1px}
+.rsvp-inner{display:block;width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.rsvp-front,.rsvp-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#d4b0ff;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid #e6d0ff}
+.rsvp-back{transform:rotateX(180deg);background:var(--lime);border-color:#ebffa3;font-size:19px;letter-spacing:1px}
+.rsvp-button.confirmed .rsvp-inner{transform:rotateX(180deg)}
+.rsvp-button:hover{filter:drop-shadow(0 0 15px #b885ed40)}
+.rsvp-note{font-size:10px;line-height:1.8;color:#a79bb7;max-width:340px;margin-top:15px}
+
+/* Two glass envelopes share the original ticket position. */
+.invitation-deck{position:relative;min-width:0}
+.invitation-window{position:relative;perspective:1100px}
+.invitation{--invite-rgb:246,195,112;--invite-color:#f6c370;position:relative;min-height:420px;isolation:isolate;border:1px solid rgba(var(--invite-rgb),.48);background:linear-gradient(140deg,rgba(var(--invite-rgb),.15),rgba(var(--invite-rgb),.025) 50%,rgba(var(--invite-rgb),.09)),#17131bd9;backdrop-filter:blur(24px) saturate(125%);-webkit-backdrop-filter:blur(24px) saturate(125%);box-shadow:inset 0 1px 0 #ffffff30,inset 0 -1px 0 #ffffff08,0 25px 60px #0004,0 0 45px rgba(var(--invite-rgb),.08);border-radius:4px}
+.invitation.violet{--invite-rgb:197,167,255;--invite-color:#c5a7ff;background:linear-gradient(145deg,#9570d72b,#32204520 50%,#9f66e51c),#13101bd9}
+.invitation[hidden],.envelope-cover[hidden],.invite-details[hidden]{display:none}
+.envelope-cover{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:100%;min-height:420px;padding:26px;text-align:left;background:none;color:var(--invite-color);overflow:hidden}
+.envelope-top{display:flex;justify-content:space-between;align-items:center;gap:15px;width:100%;font-size:9px;letter-spacing:1.7px;z-index:3}
+.envelope-top b{font-family:'Barlow Condensed',sans-serif;font-size:25px;letter-spacing:1px}
+.envelope-flap{position:absolute;inset:0 0 38%;background:linear-gradient(150deg,rgba(var(--invite-rgb),.18),rgba(var(--invite-rgb),.035));clip-path:polygon(0 0,100% 0,100% 37%,50% 100%,0 37%);transform-origin:top;transition:transform .55s,opacity .55s;box-shadow:inset 0 1px #ffffff30;pointer-events:none}
+.envelope-cover:after{content:'';position:absolute;inset:27% 0 0;background:linear-gradient(32deg,transparent 49.7%,rgba(var(--invite-rgb),.2) 50%,transparent 50.3%),linear-gradient(-32deg,transparent 49.7%,rgba(var(--invite-rgb),.2) 50%,transparent 50.3%);pointer-events:none}
+.envelope-seal{position:absolute;top:48%;left:50%;width:62px;height:62px;display:grid;place-items:center;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(var(--invite-rgb),.6);background:radial-gradient(circle at 30% 20%,rgba(var(--invite-rgb),.4),#1b1621);font-size:36px;box-shadow:0 0 30px rgba(var(--invite-rgb),.18),inset 0 0 0 5px rgba(var(--invite-rgb),.07);z-index:2;transition:transform .5s,opacity .4s}
+.envelope-caption{display:flex;flex-direction:column;gap:17px;text-align:center;width:100%;z-index:2;padding-bottom:4px}
+.envelope-caption strong{font-size:24px;line-height:1.4;letter-spacing:-.5px;font-weight:600}
+.envelope-caption>span{font-size:9px;letter-spacing:2px;opacity:.7}
+.envelope-cover:hover .envelope-seal{transform:translate(-50%,-50%) rotate(30deg);box-shadow:0 0 45px rgba(var(--invite-rgb),.35)}
+.envelope-cover:focus-visible{outline-color:var(--invite-color);outline-offset:-6px}
+.envelope-cover.unsealing .envelope-flap{transform:rotateX(155deg);opacity:0}
+.envelope-cover.unsealing .envelope-seal{transform:translate(-50%,-80%) scale(.6);opacity:0}
+.envelope-cover.unsealing .envelope-caption{opacity:0;transition:opacity .35s}
+.invite-details{padding:25px 28px;animation:invite-unfold .55s ease both}
+.invite-details .ticket-top{color:var(--invite-color);border-color:rgba(var(--invite-rgb),.3);font-size:8px;gap:10px}
+.invite-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:20px}
+.invite-time{font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:700;line-height:1;color:var(--invite-color)}
+.close-envelope{background:none;font-size:9px;color:var(--invite-color);padding:12px 0}
+.invite-details h3{font-size:clamp(23px,2.2vw,30px);line-height:1.25;letter-spacing:-.8px;margin:15px 0 10px}
+.invite-address{font-size:12px;line-height:1.85;color:#e1dae5;margin:0}
+.invite-note{font-size:11px;line-height:1.8;color:#a99fab;margin:16px 0}
+.invite-meta{display:grid;grid-template-columns:82px 1fr;gap:10px;padding:10px 0;border-top:1px solid #ffffff12;font-size:10px;line-height:1.7}
+.invite-meta span{color:var(--invite-color);font-size:8px;letter-spacing:.7px}.invite-meta strong{font-weight:400;color:#d7cfdd}
+.invite-details .mini-bars{background:repeating-linear-gradient(90deg,var(--invite-color) 0 1px,transparent 1px 3px,var(--invite-color) 3px 6px,transparent 6px 8px)}
+.invitation-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:15px}
+.stop-count{font-size:9px;letter-spacing:1.5px;color:#c4b3d8}
+.invitation-controls>div{display:flex;gap:8px}
+.invitation-controls button{width:42px;height:42px;border:1px solid #d4b0ff55;background:#21192ea0;font-size:20px;color:#d4b0ff;transition:background .2s}
+.invitation-controls button:hover:not(:disabled){background:#d4b0ff;color:#17111d}
+.invitation-controls button:disabled{opacity:.25;cursor:default}
+.stop-arrive{animation:stop-slide .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes stop-slide{from{opacity:0;transform:translateY(var(--slide-from,45px))}to{opacity:1;transform:none}}
+@keyframes invite-unfold{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media(max-width:600px){.award-card .performance-name{font-size:11px;min-height:58px;padding:0 3px}.award-pedestal{top:134px}.award-card:first-child .performance-name{font-size:12px;min-height:0}.invitation,.envelope-cover{min-height:375px}.envelope-cover{padding:22px}.envelope-caption strong{font-size:22px}.invite-details{padding:22px}.invite-details h3{font-size:25px}.invite-meta{grid-template-columns:74px 1fr}.rsvp-button{min-width:225px;font-size:10px}.fire-button .fire-label{font-size:10px}.button-flames i{width:18px}.invite-time{font-size:50px}}
+@media(prefers-reduced-motion:reduce){.button-flames i{filter:none}.envelope-cover.unsealing .envelope-flap{transform:none}.rsvp-inner{transition:none}}
