@@ -4,7 +4,7 @@
  */
 (() => {
   'use strict';
-  const PARTY = { date: 'Thứ Bảy, 03/10/2026', dressCode: 'Lên đồ thật chất. Mang theo năng lượng thật cháy.' };
+  const PARTY = { date: 'Thứ Sáu, 02/10/2026', dressCode: 'Lên đồ thật chất. Mang theo năng lượng thật cháy.' };
   const STOPS = [
     { theme: 'amber', time: '19:00', title: 'The Gangs Central', kicker: 'Nâng ly cùng đồng đội', address: '87 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP. HCM', note: 'Gặp nhau, ăn thật ngon và nâng ly cho những gì chúng ta đã cùng làm được.' },
     { theme: 'violet', time: '23:00', title: 'Hẹn nhau dưới ánh đèn', kicker: 'Đêm còn dài, mình còn cháy', address: 'Địa điểm club sẽ được bật mí sớm trong nhóm. Cứ lên đồ, phần còn lại để cả đội lo.', note: 'Sau bữa tiệc, mình nối tiếp cuộc vui bằng âm nhạc và những bước nhảy hết mình.' }
