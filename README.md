@@ -6,7 +6,7 @@ Mở `index.html` bằng trình duyệt. Không cần cài Node, React hoặc GS
 - `style.css`: bố cục responsive, màu sắc, font và hiệu ứng.
 - `index.html`: điểm mở trang. Font Google là tùy chọn; khi mất mạng có font hệ thống dự phòng.
 
-Ngày tổ chức là Thứ Sáu, 02/10/2026, cấu hình tại `PARTY.date` ở đầu `thiep.jsx`. `STOPS` chứa hai tăng, tăng 1 lúc 19:00 tại The Gangs Central, tăng 2 lúc 23:00 với địa điểm club chờ thông báo. Hai phong bì kính mở/gấp riêng, chuyển bằng hai ô chọn có tên tăng, giờ và địa điểm.
+Ngày tổ chức là Thứ Sáu, 02/10/2026, cấu hình tại `PARTY.date` ở đầu `thiep.jsx`. `STOPS` chứa hai tăng, tăng 1 lúc 19h30 tại 303 Beer garden, tăng 2 lúc 22h30 tại Chill Sky Bar. Cả hai thiệp có VIP password: Kian 8899. Thiệp tăng 2 ghi lưu ý trang phục: không dép lê, nam không mặc quần ngắn. Hai phong bì kính mở/gấp riêng, chuyển bằng hai ô chọn có tên tăng, giờ và địa điểm.
 
 Nút “Xác nhận tham gia” lật thành “🔥 Game On!” và lưu lựa chọn bằng localStorage. Nhấn lại để bỏ xác nhận. Đây là phản hồi trên thiết bị, chưa gửi đăng ký đến ban tổ chức. Nếu trình duyệt chặn lưu trữ, lựa chọn chỉ tồn tại trong lần mở trang đó.
 
